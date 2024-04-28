@@ -15,7 +15,30 @@
             text-transform: capitalize;
             margin-bottom: 36px;
         }
-
+        .catalog-single__more {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            button {
+                width: 100%;
+                max-width: 248px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 40px;
+                border-radius: 5px;
+                border: 1px solid rgba(230, 230, 230, 0.60);
+                background: #F9F9F9;
+                gap: 8px;
+                color: #333;
+                font-family: Roboto;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+            }
+        }
         .brend-single__grid {
             width: 100%;
             display: grid;

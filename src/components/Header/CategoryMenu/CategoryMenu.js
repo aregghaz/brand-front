@@ -38,6 +38,7 @@ function CategoryMenu({headerToggleClick, setMobileToggle}) {
                                 href={`/categorySingl/${category.slug}`} onClick={() => {
                                 dispatch(fetchSingleCategory({categorySlug: category.slug, limit: 20}));
                                 dispatch(fetchSinglCategoryChildren({categoryId: category.id, limit: 20}))
+                                headerToggleClick(false);
                             }}
                             >{category.icon != 0 && <Image src={"https://back.brend-instrument.ru" + category.icon} width={15} height={15}/>}{category.title}</Link>
                             <ul>
@@ -47,6 +48,7 @@ function CategoryMenu({headerToggleClick, setMobileToggle}) {
                                             <Link href={`/categorySingl/${el.slug}`} onClick={() => {
                                                 dispatch(fetchSingleCategory({categorySlug: el.slug, limit: 20}));
                                                 dispatch(fetchSinglCategoryChildren({categoryId: el.id, limit: 20}))
+                                                headerToggleClick(false);
                                             }}>{el.title}</Link>
                                         </li>
                                     ))

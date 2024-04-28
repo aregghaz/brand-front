@@ -155,7 +155,7 @@ function CatalogSingle({ slug }) {
                                             }
                                         </div>
                                         <div className="catalog-single__sort">
-                                            <CatalogTags filterData={filterDataArray} {...{ prices }} />
+                                            {/*<CatalogTags filterData={filterDataArray} {...{ prices }} />*/}
                                             <select onChange={(e) => dispatch(sortProducts(e.target.value))}>
                                                 <option value="default">По умолчанию</option>
                                                 <option value="expensive">Дороже</option>
