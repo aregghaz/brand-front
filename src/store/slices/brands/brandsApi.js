@@ -24,8 +24,17 @@ export const fetchBrandsByName = createAsyncThunk(
         return brandsByNameData
     }
 )
+
 export const fetchSinglBrendProducts = createAsyncThunk(
     "brands/fetchSinglBrendProducts",
+    async function ({brendId, limit, page}) {
+        const {data: singleBrendProductsData} = await axios.get(`https://back.brend-instrument.ru/api/products-by-brand-id/${brendId}/${limit}?page=${page}`)
+        return singleBrendProductsData
+    }
+)
+
+export const fetchTopBrand = createAsyncThunk(
+    "brands/fetchTopBrand",
     async function ({brendId, limit, page}) {
         const {data: singleBrendProductsData} = await axios.get(`https://back.brend-instrument.ru/api/products-by-brand-id/${brendId}/${limit}?page=${page}`)
         return singleBrendProductsData

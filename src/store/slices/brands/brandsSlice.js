@@ -1,6 +1,6 @@
 "use client";
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchBrands, fetchBrandsByName, fetchSinglBrendProducts, fetchSingleBrend } from "./brandsApi";
+import { fetchBrands, fetchBrandsByName, fetchSinglBrendProducts, fetchSingleBrend, fetchTopBrand } from "./brandsApi";
 
 export const brandsSlice = createSlice({
     name: "brands",
@@ -8,7 +8,8 @@ export const brandsSlice = createSlice({
         brandsData: [],
         singleBrend: {},
         brandsByNameData: [],
-        singleBrendData: {}
+        singleBrendData: {},
+        topBrandData: {}
     },
     reducers: {
 
@@ -18,7 +19,7 @@ export const brandsSlice = createSlice({
             if(payload) {
                 state.brandsData = [...payload];
             }
-        });
+        })
         builder.addCase(fetchSingleBrend.fulfilled, (state, {payload}) => {
             if(payload && payload.image) {
                 state.singleBrend = {
@@ -26,15 +27,20 @@ export const brandsSlice = createSlice({
                     image: "https://back.brend-instrument.ru" + payload.image
                 };
             }
-        });
+        })
         builder.addCase(fetchBrandsByName.fulfilled, (state, {payload}) => {
             if(payload) {
                 state.brandsByNameData = [...payload];
             }
-        });
+        })
         builder.addCase(fetchSinglBrendProducts.fulfilled, (state, {payload}) => {
             if(payload) {
                 state.singleBrendData = {...payload};
+            }
+        })
+        builder.addCase(fetchTopBrand.fulfilled, (state, {payload}) => {
+            if(payload) {
+                state.topBrandData = {...payload};
             }
         });
     }
