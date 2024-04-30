@@ -4,10 +4,13 @@ import { fetchSearch } from "./searchApi"
 export const searchSlice = createSlice({
     name: "search",
     initialState: {
-        searchProductsData: []
+        searchProductsData: [],
+        searchValue: ""
     },
     reducers: {
-
+        toggleSearchValue: (state, {payload}) => {
+            state.searchValue = payload 
+        }
     },
 
     extraReducers: (builder) => {
@@ -20,4 +23,5 @@ export const searchSlice = createSlice({
 })
 
 export const selectSearch = state => state.search
+export const {toggleSearchValue} = searchSlice.actions
 export const searchReducer = searchSlice.reducer

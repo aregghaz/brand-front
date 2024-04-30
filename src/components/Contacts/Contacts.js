@@ -96,9 +96,9 @@ function Contacts() {
                             {/*<a href={contactsData?.sub_od}>*/}
                             {/*    <OkIcon />*/}
                             {/*</a>*/}
-                            <a href={contactsData?.sub_x}>
+                            {/* <a href={contactsData?.sub_x}>
                                 <AssetIcon />
-                            </a>
+                            </a> */}
                         </div>
                     </div>
                 </div>

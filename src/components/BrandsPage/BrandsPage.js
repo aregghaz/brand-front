@@ -46,7 +46,7 @@ function BrandsPage() {
                 <div className="bredns-page__grid">
                     {
                         brandsByNameData?.map(brend => (
-                            <Link key={brend.id} href={`/brandsingle/${brend.slug}`}>{brend.title}</Link>
+                            <Link key={brend.id} href={`/brandSingle/${brend.slug}`}>{brend.title}</Link>
                         ))
                     }
                 </div>

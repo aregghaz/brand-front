@@ -6,6 +6,7 @@ import { selectSearch, toggleSearchValue } from '../../../store/slices/search/se
 import { fetchSingleProduct } from "../../../store/slices/products/productsApi"
 import { SearchIcon } from '../../../svg';
 import { selectCategory } from '../../../store/slices/category/categorySlice';
+import parse from 'html-react-parser';
 
 import Link from 'next/link';
 import Image from 'next/image';
@@ -13,7 +14,7 @@ import Image from 'next/image';
 function HeaderSearch({ headerToggles, headerToggleClick, mobileSearch, setMobileSearch }) {
     const [category, setCategory] = useState(false)
     const { categoryData } = useSelector(selectCategory)
-
+    const [searchResults, setSearchResults] = useState([])
     const dispatch = useDispatch()
     const { searchProductsData } = useSelector(selectSearch)
     const searchRef = useRef(null)
@@ -30,7 +31,7 @@ function HeaderSearch({ headerToggles, headerToggleClick, mobileSearch, setMobil
 
     useEffect(() => {
         console.log(typeof window !== 'undefined' && window.innerWidth);
-
+        setSearchResults([...searchProductsData.slice(0,3)])
     }, [searchProductsData])
 
     const productLinkClick = (slug) => {
@@ -65,7 +66,7 @@ function HeaderSearch({ headerToggles, headerToggleClick, mobileSearch, setMobil
                 <div className='header__search-result'>
                     <div className='header__search-scroll'>
                         {
-                            searchProductsData?.map((el, index) => {
+                            searchResults?.map((el, index) => {
                                 return count >= index && (<div key={el.id} className='header__search-item'>
                                     <Link href={`/product/${el.slug}`} className='img'
                                         onClick={() => productLinkClick(el.slug)}>
@@ -84,8 +85,10 @@ function HeaderSearch({ headerToggles, headerToggleClick, mobileSearch, setMobil
                                                         <span> {el.price} ₽</span> : <></>
                                                 }
                                             </div>
-                                            <div className='header__search-description'
-                                                dangerouslySetInnerHTML={{ __html: el.description }} />
+                                            <div className='header__search-description'>
+                                                {parse(el.description.slice(0, 100))}
+                                                <span>{el.description.split("").length > 100 && "..."}</span>
+                                            </div>
                                         </Link>
                                     </h4>
                                 </div>)

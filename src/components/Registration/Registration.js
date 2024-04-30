@@ -85,13 +85,13 @@ function Registration() {
                                 </p>
                             }   
                             <div className='flex'>
-                                <label className='input-text'>Имя *
-                                    <Field type="text" className="input" name="name" autoComplete="off" style={{ borderColor: errors.name && touched.name ? 'red' : 'inherit' }} onChange={handleChange} onBlur={handleBlur} />
-                                </label>
                                 <label className='input-text'>Фамилия *
                                     <Field type="text" className="input" name="lastName" autoComplete="off" style={{ borderColor: errors.lastName && touched.lastName ? 'red' : 'inherit' }}
                                         onChange={handleChange}
                                         onBlur={handleBlur} />
+                                </label>
+                                <label className='input-text'>Имя *
+                                    <Field type="text" className="input" name="name" autoComplete="off" style={{ borderColor: errors.name && touched.name ? 'red' : 'inherit' }} onChange={handleChange} onBlur={handleBlur} />
                                 </label>
                             </div>
                             <label className='input-text'>Отчество *
@@ -127,7 +127,7 @@ function Registration() {
                                     onChange={handleChange}
                                     onBlur={handleBlur} />
                             </label>
-                            <label className="input-btn"><input type="submit" defaultValue="Регистрация" className="input" /></label>
+                            <label className="input-btn"><input type="submit" value="Регистрация" className="input" /></label>
                         </Form>
                     )}
                     </Formik>

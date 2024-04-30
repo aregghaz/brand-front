@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect } from 'react'
 
-function SuccsesModal({succsesClick, title, time = 2000, html = false}) {
+function SuccsesModal({succsesClick, title, time = 4000, html = false}) {
     useEffect(() => {
         setTimeout(() => {
             succsesClick(null)
