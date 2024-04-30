@@ -9,10 +9,7 @@ const timestampToDate = (date) => {
     const day = dayRaw > 9 ? dayRaw : `0${dayRaw}`;
   ///  var yesterday = new Date(new Date().getTime() - (24 * 60 * 60 * 1000));
 
-    var myDate = new Date(`${monthFormatted}/${day}/${year} ${hours}:${minute}:${getSeconds}`) // your date object
-    myDate.setHours(myDate.getHours() + 24)
-   // console.log(myDate,'4444')
-    return myDate;
+    return `${monthFormatted}/${day}/${year} ${hours}:${minute}:${getSeconds}`;
 };
 
 export default timestampToDate;

@@ -19,7 +19,7 @@ import Brendcrumbs from '../Brendcrumbs/Brendcrumbs';
 import {Thumbs} from 'swiper/modules';
 import {useRouter} from 'next/router';
 import SuccsesModal from '../SuccsesModal/SuccsesModal';
-import timestampToDate, {useCountdown} from "@/utils/dateTime";
+import timestampToDate from "@/utils/dateTime";
 
 
 function ProductSingle({slug}) {
@@ -249,7 +249,7 @@ function ProductSingle({slug}) {
                                                         }
                                                     }}>
                                                     <BronIcon/>
-                                                    {singlProductData.book.length < singlProductData.quantity ? "Забронировать"  : <>Забронировано <span className='product_timer'><br/>{useCountdown(singlProductData.book[0].created_at)}</span></>}
+                                                    {singlProductData.book.length < singlProductData.quantity ? "Забронировать"  : <>Забронировано <span className='product_timer'><br/>{timestampToDate(singlProductData.book[0].created_at)}</span></>}
                                                 </Link>
                                                 <button onClick={() => addToWishList()} style={{color: "#0C96D1"}}>
                                                     <LikeIcon/>
