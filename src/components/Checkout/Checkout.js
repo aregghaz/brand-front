@@ -23,6 +23,8 @@ function Checkout() {
     const [payment, setPayment] = useState(false)
     const [toggleSucces, setToggleSucces] = useState(false)
     const dispatch = useDispatch()
+    const [regData, setRegData] = useState({})
+    const [cloneEmail, setCloneEmail] = useState(false)
     const router = useRouter()
     const validationSchema = yup.object().shape({
         name: yup.string()
@@ -133,7 +135,7 @@ function Checkout() {
                                         },1900 )
                                     })
                                 } else {
-                                    const {data: regData} = await axios.post("https://back.brend-instrument.ru/api/auth/registration", {
+                                    await axios.post("https://back.brend-instrument.ru/api/auth/registration", {
                                         name: values.name,
                                         lastName: values.lastName, 
                                         phone: values.phone,
@@ -141,7 +143,14 @@ function Checkout() {
                                         password: "65654654",
                                         password_confirmation: "65654654",
                                         subscribed: false
-                                    })
+                                    }).then(res => {
+                                        setRegData({...res.data})
+                                        setCloneEmail(false)
+                                    }).catch(res => {
+                                        if(res.response.data.error.email) {
+                                            setCloneEmail(true)
+                                        }
+                                    }) 
                                     if (regData.access_token) {
                                         dispatch(logIn({ loginData: regData.access_token, save: true}))
                                         dispatch(fetchUser({ userToken: regData.access_token }))
@@ -225,15 +234,22 @@ function Checkout() {
                                     })
 
                                 } else {
-                                    const { data: regData } = await axios.post("https://back.brend-instrument.ru/api/auth/registration", {
+                                    await axios.post("https://back.brend-instrument.ru/api/auth/registration", {
                                         name: values.name,
-                                        lastName: values.lastName,
+                                        lastName: values.lastName, 
                                         phone: values.phone,
                                         email: values.email,
                                         password: "65654654",
                                         password_confirmation: "65654654",
                                         subscribed: false
-                                    })
+                                    }).then(res => {
+                                        setRegData({...res.data})
+                                        setCloneEmail(false)
+                                    }).catch(res => {
+                                        if(res.response.data.error.email) {
+                                            setCloneEmail(true)
+                                        }
+                                    }) 
                                     if (regData.access_token) {
                                         dispatch(fetchUser({ userToken: regData.access_token }))
                                         await axios.post(`https://back.brend-instrument.ru/api/auth/pre-order/${preOrder.id}`,
@@ -370,7 +386,20 @@ function Checkout() {
                                             <label className="input-text">Фамилия *<Field type="text" className="input" placeholder="Иванов" name="lastName" defaultValue={usersData.lastName} autoComplete="off" style={{ borderColor: errors.lastName && touched.lastName ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label>
                                             <label className="input-text">Имя *<Field type="text" className="input" placeholder="Иван" name="name" defaultValue={usersData.name} autoComplete="off" style={{ borderColor: errors.name && touched.name ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label>
                                             <label className="input-text">Отчество<Field type="text" className="input" placeholder="Иванович" autoComplete="off" name="fatherName" style={{ borderColor: errors.fatherName && touched.fatherName ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label>
-                                            <label className="input-text">Эл. адрес *<Field type="text" className="input" placeholder="ivan.ivanovich@gmail.com" defaultValue={usersData.email} name="email" autoComplete="off" style={{ borderColor: errors.email && touched.email ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label>
+                                            <label className="input-text" style={{color: cloneEmail ? "red" : "rgba(51, 51, 51, 0.6)"}}>
+                                                {cloneEmail ? "Данный E-Mail уже зарегистрирован!" : "Эл. адрес *"}
+                                                <Field 
+                                                    type="text" 
+                                                    className="input" 
+                                                    placeholder="ivan.ivanovich@gmail.com" 
+                                                    defaultValue={usersData.email} 
+                                                    name="email" 
+                                                    autoComplete="off" 
+                                                    style={{ borderColor: errors.email && touched.email || cloneEmail ? 'red' : '#EDEDED' }} 
+                                                    onChange={handleChange} 
+                                                    onBlur={handleBlur} 
+                                                />
+                                                </label>
                                             <label className="input-text">Телефон *<Field type="text" className="input" placeholder="+791 502 31111" defaultValue={usersData.phone} name="phone" autoComplete="off" style={{ borderColor: errors.phone && touched.phone ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label>
                                             {/* <label className="input-text">Компания<Field type="text" className="input" placeholder="TESTWEB" defaultValue={usersData.company && usersData.company} name="company" autoComplete="off" style={{ borderColor: errors.company && touched.company ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label> */}
                                             <label className="input-text">Адрес *<Field type="text" className="input" placeholder="Адрес" defaultValue={usersData.address_1 && usersData.address_1} name="address_1" autoComplete="off" style={{ borderColor: errors.address_1 && touched.address_1 ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label>
