@@ -19,6 +19,6 @@ export default function Custom404() {
         }
     }, [refresh])
     return (
-        <h1>asokd;al</h1>
+        <h1>404</h1>
     )
 }
