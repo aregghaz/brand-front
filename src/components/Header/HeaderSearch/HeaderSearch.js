@@ -30,7 +30,6 @@ function HeaderSearch({ headerToggles, headerToggleClick, mobileSearch, setMobil
     }
 
     useEffect(() => {
-        console.log(typeof window !== 'undefined' && window.innerWidth);
         setSearchResults([...searchProductsData.slice(0,3)])
     }, [searchProductsData])
 
@@ -95,7 +94,7 @@ function HeaderSearch({ headerToggles, headerToggleClick, mobileSearch, setMobil
                             })
                         }
                         <div className="header__search-show-more">
-                            <Link href={"/search"} onClick={() => headerToggleClick(null)} className="show-more">
+                            <Link href={"/search"} onClick={() => {setCount(count + 4); headerToggleClick(null)}} className="show-more">
                                 Все результаты ({
                                     count > searchProductsData.length ? searchProductsData.length : searchProductsData.length - count
                                 })
