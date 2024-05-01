@@ -1,6 +1,6 @@
 "use client";
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchBrands, fetchBrandsByName, fetchSinglBrendProducts, fetchSingleBrend, fetchTopBrand } from "./brandsApi";
+import { fetchBrands, fetchBrandsByName, fetchSinglBrendProducts, fetchSingleBrend, fetchTopBrand, fetchTopBrands } from "./brandsApi";
 
 export const brandsSlice = createSlice({
     name: "brands",
@@ -9,7 +9,8 @@ export const brandsSlice = createSlice({
         singleBrend: {},
         brandsByNameData: [],
         singleBrendData: {},
-        topBrandData: {}
+        topBrandData: {},
+        topBrandsData: []
     },
     reducers: {
 
@@ -41,6 +42,11 @@ export const brandsSlice = createSlice({
         builder.addCase(fetchTopBrand.fulfilled, (state, {payload}) => {
             if(payload) {
                 state.topBrandData = {...payload};
+            }
+        });
+        builder.addCase(fetchTopBrands.fulfilled, (state, {payload}) => {
+            if(payload) {
+                state.topBrandsData = [...payload];
             }
         });
     }

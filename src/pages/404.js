@@ -13,7 +13,7 @@ export default function Custom404() {
         if(router.asPath) {
             let segments = router.asPath.split('/');
             let firstSegment = segments[1];
-            if(firstSegment === "categorySingl" || firstSegment === "newsSingl" || firstSegment === "brandsingle" || firstSegment === "product" || firstSegment === "orderSingle") {
+            if(firstSegment === "categorySingl" || firstSegment === "newsSingl" || firstSegment === "brandSingle" || firstSegment === "product" || firstSegment === "orderSingle") {
                 router.push(router.asPath)
             }
         }

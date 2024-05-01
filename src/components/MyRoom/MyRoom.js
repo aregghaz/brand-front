@@ -65,7 +65,7 @@ function MyRoom() {
                                             phone: usersData.phone,
                                             email: usersData.email,
                                             created_at: usersData.created_at,
-                                            city: usersData.address[0].city ? usersData.address[0].city : "",
+                                            city: usersData.address[0]?.city ? usersData.address[0].city : "",
                                         }
                                     }
                                     onSubmit={async (values, {resetForm}) => {

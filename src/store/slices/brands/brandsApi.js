@@ -40,3 +40,11 @@ export const fetchTopBrand = createAsyncThunk(
         return singleBrendProductsData
     }
 )
+
+export const fetchTopBrands = createAsyncThunk(
+    "brands/fetchTopBrands",
+    async function ({limit}) {
+        const {data: topBrandsData} = await axios.get(`https://back.brend-instrument.ru/api/top-brands/${limit}`)
+        return topBrandsData
+    }
+)
