@@ -1,5 +1,5 @@
 "use client"
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { logIn, selectUsers, toggleAddress } from '../../store/slices/users/usersSlice'
 import { Formik, Field, Form } from 'formik';
@@ -26,6 +26,7 @@ function Checkout() {
     const [regData, setRegData] = useState({})
     const [cloneEmail, setCloneEmail] = useState(false)
     const router = useRouter()
+    const checkoutRef = useRef(null)
     const validationSchema = yup.object().shape({
         name: yup.string()
             .typeError('Напишите свое имя')
@@ -66,7 +67,7 @@ function Checkout() {
     return (
         <>
             <section className="checkout">
-                <div className="checkout__container _container">
+                <div className="checkout__container _container" ref={checkoutRef}>
                     <h1>{!preOrder.toggle ? "Оформление заказа" : "Забронировать товар"}</h1>
                     {
                         preOrder.toggle && (
@@ -149,6 +150,7 @@ function Checkout() {
                                     }).catch(res => {
                                         if(res.response.data.error.email) {
                                             setCloneEmail(true)
+                                            window.scrollTo(checkoutRef.current.offsetTop, 0);
                                         }
                                     }) 
                                     if (regData.access_token) {
@@ -248,6 +250,7 @@ function Checkout() {
                                     }).catch(res => {
                                         if(res.response.data.error.email) {
                                             setCloneEmail(true)
+                                            window.scrollTo(checkoutRef.current.offsetTop, 0);
                                         }
                                     }) 
                                     if (regData.access_token) {
