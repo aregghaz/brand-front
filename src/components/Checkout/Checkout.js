@@ -108,10 +108,10 @@ function Checkout() {
                                                 created_at: values.created_at,
                                                 company: values.company,
                                                 address_1: values.address_1,
-                                                address_2: values.address_2,
+                                                address_2: "values.address_2",
+                                                country: "values.country",
+                                                post: "values.post",
                                                 city: values.city,
-                                                post: values.post,
-                                                country: values.country,
                                                 region: values.region,
                                                 total: totalPrice,
                                                 user_id: usersData.id,
@@ -158,10 +158,10 @@ function Checkout() {
                                                     created_at: values.created_at,
                                                     company: values.company,
                                                     address_1: values.address_1,
-                                                    address_2: values.address_2,
+                                                    address_2: "values.address_2",
+                                                    country: "values.country",
+                                                    post: "values.post",
                                                     city: values.city,
-                                                    post: values.post,
-                                                    country: values.country,
                                                     region: values.region,
                                                     total: totalPrice,
                                                     user_id: usersData.id,
@@ -199,10 +199,10 @@ function Checkout() {
                                                 created_at: values.created_at,
                                                 company: values.company,
                                                 address_1: values.address_1,
-                                                address_2: values.address_2,
+                                                address_2: "values.address_2",
+                                                country: "values.country",
+                                                post: "values.post",
                                                 city: values.city,
-                                                post: values.post,
-                                                country: values.country,
                                                 region: values.region,
                                                 total: totalPrice,
                                                 user_id: usersData.id,
@@ -249,10 +249,10 @@ function Checkout() {
                                                     created_at: values.created_at,
                                                     company: values.company,
                                                     address_1: values.address_1,
-                                                    address_2: values.address_2,
+                                                    address_2: "values.address_2",
+                                                    country: "values.country",
+                                                    post: "values.post",
                                                     city: values.city,
-                                                    post: values.post,
-                                                    country: values.country,
                                                     region: values.region,
                                                     total: totalPrice,
                                                     user_id: usersData.id,
@@ -373,7 +373,7 @@ function Checkout() {
                                             <label className="input-text">Эл. адрес *<Field type="text" className="input" placeholder="ivan.ivanovich@gmail.com" defaultValue={usersData.email} name="email" autoComplete="off" style={{ borderColor: errors.email && touched.email ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label>
                                             <label className="input-text">Телефон *<Field type="text" className="input" placeholder="+791 502 31111" defaultValue={usersData.phone} name="phone" autoComplete="off" style={{ borderColor: errors.phone && touched.phone ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label>
                                             {/* <label className="input-text">Компания<Field type="text" className="input" placeholder="TESTWEB" defaultValue={usersData.company && usersData.company} name="company" autoComplete="off" style={{ borderColor: errors.company && touched.company ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label> */}
-                                            {/* <label className="input-text">Адрес *<Field type="text" className="input" placeholder="Адрес" defaultValue={usersData.address_1 && usersData.address_1} name="address_1" autoComplete="off" style={{ borderColor: errors.address_1 && touched.address_1 ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label> */}
+                                            <label className="input-text">Адрес *<Field type="text" className="input" placeholder="Адрес" defaultValue={usersData.address_1 && usersData.address_1} name="address_1" autoComplete="off" style={{ borderColor: errors.address_1 && touched.address_1 ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label>
                                             {/* <label className="input-text">Адрес 2<Field type="text" className="input" placeholder="Адрес 2" defaultValue={usersData.address_2 && usersData.address_2} name="address_2" autoComplete="off" style={{ borderColor: errors.address_2 && touched.address_2 ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label> */}
                                             <label className="input-text">Город *<Field type="text" className="input" placeholder="Город" defaultValue={usersData.city && usersData.city} name="city" autoComplete="off" style={{ borderColor: errors.city && touched.city ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label>
                                             {/* <label className="input-text">Почтовый индекс *<Field type="text" className="input" placeholder={125009} defaultValue={usersData.post && usersData.post} name="post" autoComplete="off" style={{ borderColor: errors.post && touched.post ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label> */}

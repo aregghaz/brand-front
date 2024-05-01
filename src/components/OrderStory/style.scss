@@ -38,6 +38,13 @@
                 flex-direction: column;
                 gap: 36px;
 
+                .pagination {
+                    justify-content: center;
+                    &::before {
+                        display: none;
+                    }
+                }
+
                 h2 {
                     color: #333;
                     font-family: Roboto;

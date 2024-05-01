@@ -1,9 +1,29 @@
-import React from 'react'
+"use client"
+import React, { useCallback, useState } from 'react'
 import MyRoomMenu from '../MyRoomMenu/MyRoomMenu'
 import OrderStoryTable from '../OrderStoryTable/OrderStoryTable'
 import Pagination from '../Pagination/Pagination'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectUsers } from '@/store/slices/users/usersSlice'
+import { fetchOrders } from '@/store/slices/users/usersApi'
 
 function OrderStory() {
+
+    const [toggleMore, setToggleMore] = useState(true)
+    const dispatch = useDispatch()
+    const {loginData, usersData, ordersStoryData} = useSelector(selectUsers)
+    const [initialLength, setInitialLength] = useState(2)
+
+    const showMore = useCallback(() => {
+        console.log(ordersStoryData.length + 5, initialLength + 5);
+        if(loginData.access_token) {
+            dispatch(fetchOrders({userToken: loginData.access_token, limit:  (ordersStoryData.length + 5), page: 1}))
+        }
+        setInitialLength(initialLength+5)
+        if(initialLength + 5 !== ordersStoryData.length + 5) {
+            setToggleMore(false)
+        }
+    }, [ordersStoryData, toggleMore])
     return (
         <section class="order-story">
             <div class="order-story__container _container">
@@ -15,7 +35,7 @@ function OrderStory() {
                         <div className='order-story__box'>
                             <OrderStoryTable />
                         </div>
-                        {/* <Pagination /> */}
+                        {toggleMore && <Pagination showMore={showMore} />}
                     </div>
                 </div>
             </div>

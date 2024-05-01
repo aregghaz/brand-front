@@ -15,7 +15,7 @@ function OrderStoryTable() {
     useEffect(() => {
         if(!getOrders) {
             if(loginData.access_token) {
-                dispatch(fetchOrders({userToken: loginData.access_token, limit:  20, page: 1}))
+                dispatch(fetchOrders({userToken: loginData.access_token, limit:  5, page: 1}))
                 setGetOrders(true)
             }
         }
@@ -50,7 +50,7 @@ function OrderStoryTable() {
                             <Link href={`/orderSingle/${el.id}`} className='alllink' onClick={() => {
                             dispatch(fetchOrderSingle({userToken: loginData.access_token, orderId: el.id}))
                         }}></Link>
-                                <p>#{el.id}</p>
+                                <p>#{idx + 1}</p>
                             </td>
                             <td>
                                 <p>{el.count}</p>
