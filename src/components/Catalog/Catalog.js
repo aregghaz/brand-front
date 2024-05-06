@@ -5,16 +5,16 @@ import { selectCategory } from '../../store/slices/category/categorySlice';
 import { fetchCategory } from '../../store/slices/category/categoryApi';
 import CategoryItem from '../CategoryItem/CategoryItem';
 
-function Catalog() {
+function Catalog({Item}) {
     const dispatch = useDispatch()
-    const {categoryData} = useSelector(selectCategory)
+    const categoryData =Item
     const [getCategory, setGetCategory] = useState(false)
-    useEffect(() => {
-        if(!categoryData.length && !getCategory) {
-            dispatch(fetchCategory({limit: 20}))
-            setGetCategory(true)
-        }
-    }, [categoryData])
+    // useEffect(() => {
+    //     if(!categoryData.length && !getCategory) {
+    //       ///  dispatch(fetchCategory({limit: 20}))
+    //         setGetCategory(true)
+    //     }
+    // }, [categoryData])
     return (
         <section className="catalog">
             <div className="catalog__container _container">

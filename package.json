@@ -37,6 +37,7 @@
     "sass": "^1.74.1",
     "simple-react-lightbox": "^3.6.9-0",
     "swiper": "^11.1.0",
+    "swr": "^2.2.5",
     "web-vitals": "^3.5.2",
     "yup": "^1.4.0"
   }

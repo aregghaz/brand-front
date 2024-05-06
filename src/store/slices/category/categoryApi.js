@@ -1,11 +1,17 @@
 "use client";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import useSWR from 'swr'
+export const fetcher = (url) => fetch(url, {headers: {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"}}).then((r) => r.json())
 
 export const fetchCategory = createAsyncThunk(
     "category/fetchCategory",
     async function ({limit}) {
-        const {data: categoryData} = await axios.get(`https://back.brend-instrument.ru/api/category`, {headers: {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"}})
+        const {data: categoryData} = await useSWR(
+            `https://back.brend-instrument.ru/api/category`,
+            fetcher
+        )
+       /// const {data: categoryData} = await axios.get(`https://back.brend-instrument.ru/api/category`)
         return categoryData
     }
 )
@@ -13,7 +19,13 @@ export const fetchCategory = createAsyncThunk(
 export const fetchTopCategory = createAsyncThunk(
     "category/fetchTopCategory",
     async function ({limit}) {
-        const {data: topCategoryData} = await axios.get(`https://back.brend-instrument.ru/api/top-category/${limit}`, {headers: {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"}})
+      //  const {data: topCategoryData} = await axios.get(`https://back.brend-instrument.ru/api/top-category/${limit}`, {headers: {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"}})
+
+        const {data: topCategoryData} = useSWR(
+            `https://back.brend-instrument.ru/api/top-category/${limit}`,
+            fetcher
+        )
+
         return topCategoryData
     }
 )
