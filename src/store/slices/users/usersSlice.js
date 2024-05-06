@@ -74,7 +74,7 @@ export const usersSlice = createSlice({
         toggleAddress(state, { payload }) {
             state.usersData = {
                 ...state.usersData,
-                address: state.usersData.address.map(el => ({
+                address: state.usersData.address?.map(el => ({
                     ...el,
                     checked: el.id === payload.id ? true : false
                 }))
@@ -99,10 +99,10 @@ export const usersSlice = createSlice({
                 state.usersData = {
                     ...payload.data,
                     address: [
-                        ...payload.data.address.map(el => ({
+                        payload?.data?.address && {...payload.data.address?.map(el => ({
                             ...el,
                             checked: false
-                        }))
+                        }))}
                     ]
                 };
                 if(!state.loginData.access_token || state.saveUser) {

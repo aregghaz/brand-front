@@ -23,7 +23,6 @@ function Checkout() {
     const [payment, setPayment] = useState(false)
     const [toggleSucces, setToggleSucces] = useState(false)
     const dispatch = useDispatch()
-    const [regData, setRegData] = useState({})
     const [cloneEmail, setCloneEmail] = useState(false)
     const router = useRouter()
     const checkoutRef = useRef(null)
@@ -45,13 +44,12 @@ function Checkout() {
             .matches(/[0-9]/, 'Только цифры')
             .required('Обязательное поле'),
         fatherName: yup.string(),
-        city: yup.string() .required('Обязательное поле'),
-        address_1: yup.string()
+        city: yup.string().required('Обязательное поле')
     });
-    useEffect(() => { 
-        if(!getUser) {
-            if(loginData.access_token) {
-                dispatch(fetchUser({userToken: loginData.access_token}))
+    useEffect(() => {
+        if (!getUser) {
+            if (loginData.access_token) {
+                dispatch(fetchUser({ userToken: loginData.access_token }))
             }
             setGetUser(true)
         }
@@ -59,10 +57,10 @@ function Checkout() {
     const setAddtessType = useCallback(() => { },)
     const succesHandler = useCallback(() => {
         setToggleSucces(false)
-    },[])
+    }, [])
 
-    const styleLink ={
-        textDecoration:"underline"
+    const styleLink = {
+        textDecoration: "underline"
     }
     return (
         <>
@@ -88,15 +86,13 @@ function Checkout() {
                             email: usersData.email,
                             created_at: usersData.created_at,
                             company: usersData.company ? usersData.company : "",
-                            address_1: usersData.address_1 ? usersData.address_1 : "",
-                            address_2: usersData.address_2 ? usersData.address_2 : "",
                             city: usersData.city ? usersData.city : "",
                             post: usersData.post ? usersData.post : "",
                             country: usersData.country ? usersData.country : "",
                             region: usersData.region ? usersData.region : ""
                         }}
                         onSubmit={async (values, { resetForm }) => {
-                            console.log(loginData.access_token);
+                            let regData = {}
                             if (!preOrder.toggle) {
                                 if (usersData.name) {
                                     await axios.post(`https://back.brend-instrument.ru/api/auth/create-order`,
@@ -110,7 +106,7 @@ function Checkout() {
                                                 email: values.email,
                                                 created_at: values.created_at,
                                                 company: values.company,
-                                                address_1: values.address_1,
+                                                address_1: "values.address_1",
                                                 address_2: "values.address_2",
                                                 country: "values.country",
                                                 post: "values.post",
@@ -128,33 +124,33 @@ function Checkout() {
                                                 Authorization: "Bearer " + loginData.access_token,
                                             }
                                         },
-                                    ).then(res => { 
+                                    ).then(res => {
                                         setToggleSucces(res.status === 200 && true)
                                         setTimeout(() => {
-                                            dispatch(fetchCart({userToken: loginData.access_token}))
+                                            dispatch(fetchCart({ userToken: loginData.access_token }))
                                             router.push("/orders")
-                                        },1900 )
+                                        }, 1900)
                                     })
                                 } else {
                                     await axios.post("https://back.brend-instrument.ru/api/auth/registration", {
                                         name: values.name,
-                                        lastName: values.lastName, 
+                                        lastName: values.lastName,
                                         phone: values.phone,
                                         email: values.email,
                                         password: "65654654",
                                         password_confirmation: "65654654",
                                         subscribed: false
                                     }).then(res => {
-                                        setRegData({...res.data})
                                         setCloneEmail(false)
+                                        regData = {...res.data}
                                     }).catch(res => {
-                                        if(res.response.data.error.email) {
+                                        if (res.response.data.error.email) {
                                             setCloneEmail(true)
                                             window.scrollTo(checkoutRef.current.offsetTop, 0);
                                         }
-                                    }) 
+                                    })
                                     if (regData.access_token) {
-                                        dispatch(logIn({ loginData: regData.access_token, save: true}))
+                                        dispatch(logIn({ loginData: regData.access_token, save: true }))
                                         dispatch(fetchUser({ userToken: regData.access_token }))
                                         await axios.post(`https://back.brend-instrument.ru/api/auth/create-order`,
                                             {
@@ -168,7 +164,7 @@ function Checkout() {
                                                     email: values.email,
                                                     created_at: values.created_at,
                                                     company: values.company,
-                                                    address_1: values.address_1,
+                                                    address_1: "values.address_1",
                                                     address_2: "values.address_2",
                                                     country: "values.country",
                                                     post: "values.post",
@@ -186,13 +182,13 @@ function Checkout() {
                                                     Authorization: "Bearer " + regData.access_token,
                                                 }
                                             },
-                                        ).then(res => { 
+                                        ).then(res => {
                                             setToggleSucces(res.status === 200 && true)
-                                            dispatch(fetchOrders({userToken: regData.access_token, limit:  20, page: 1}))
+                                            dispatch(fetchOrders({ userToken: regData.access_token, limit: 20, page: 1 }))
                                             setTimeout(() => {
-                                                dispatch(fetchCart({userToken: regData.access_token}))
+                                                dispatch(fetchCart({ userToken: regData.access_token }))
                                                 router.push("/orders")
-                                            },1900 )
+                                            }, 1900)
                                         })
                                     }
                                 }
@@ -209,7 +205,7 @@ function Checkout() {
                                                 email: values.email,
                                                 created_at: values.created_at,
                                                 company: values.company,
-                                                address_1: values.address_1,
+                                                address_1: "values.address_1",
                                                 address_2: "values.address_2",
                                                 country: "values.country",
                                                 post: "values.post",
@@ -227,32 +223,32 @@ function Checkout() {
                                                 Authorization: "Bearer " + loginData.access_token,
                                             }
                                         }
-                                    ).then(res => { 
+                                    ).then(res => {
                                         setToggleSucces(res.status === 200 && true)
                                         setTimeout(() => {
-                                            dispatch(fetchCart({userToken: loginData.access_token}))
+                                            dispatch(fetchCart({ userToken: loginData.access_token }))
                                             router.push("/orders")
-                                        },1900 )
+                                        }, 1900)
                                     })
 
                                 } else {
                                     await axios.post("https://back.brend-instrument.ru/api/auth/registration", {
                                         name: values.name,
-                                        lastName: values.lastName, 
+                                        lastName: values.lastName,
                                         phone: values.phone,
                                         email: values.email,
                                         password: "65654654",
                                         password_confirmation: "65654654",
                                         subscribed: false
                                     }).then(res => {
-                                        setRegData({...res.data})
                                         setCloneEmail(false)
+                                        regData = {...res.data}
                                     }).catch(res => {
-                                        if(res.response.data.error.email) {
+                                        if (res.response.data.error.email) {
                                             setCloneEmail(true)
                                             window.scrollTo(checkoutRef.current.offsetTop, 0);
                                         }
-                                    }) 
+                                    })
                                     if (regData.access_token) {
                                         dispatch(fetchUser({ userToken: regData.access_token }))
                                         await axios.post(`https://back.brend-instrument.ru/api/auth/pre-order/${preOrder.id}`,
@@ -267,7 +263,7 @@ function Checkout() {
                                                     email: values.email,
                                                     created_at: values.created_at,
                                                     company: values.company,
-                                                    address_1: values.address_1,
+                                                    address_1: "values.address_1",
                                                     address_2: "values.address_2",
                                                     country: "values.country",
                                                     post: "values.post",
@@ -282,16 +278,16 @@ function Checkout() {
                                             },
                                             {
                                                 headers: {
-                                                    Authorization: "Bearer " + loginData.access_token,
+                                                    Authorization: "Bearer " + regData.access_token,
                                                 }
                                             }
-                                        ).then(res => { 
+                                        ).then(res => {
                                             setToggleSucces(res.status === 200 && true)
-                                            dispatch(fetchOrders({userToken: regData.access_token, limit:  20, page: 1}))
+                                            dispatch(fetchOrders({ userToken: regData.access_token, limit: 20, page: 1 }))
                                             setTimeout(() => {
-                                                dispatch(fetchCart({userToken: regData.access_token}))
+                                                dispatch(fetchCart({ userToken: regData.access_token }))
                                                 router.push("/orders")
-                                            },1900 )
+                                            }, 1900)
                                         })
                                     }
                                 }
@@ -330,13 +326,13 @@ function Checkout() {
                                             <p>Способ оплаты</p>
                                         </div>
                                         <label className="checkbox" onClick={() => setPayment(true)}>
-                                            <input type="checkbox" checked={payment ? true : false} />
+                                            <input type="checkbox" checked={payment ? true : false} defaultChecked={preOrder.toggle ? true : false} />
                                             <span />
                                             <p>Наличными при получении</p>
                                         </label>
                                         {!preOrder.toggle && <label className="checkbox" onClick={() => setPayment(false)}>
-                                            <input type="checkbox" checked={payment ? false : true}/>
-                                            <span/>
+                                            <input type="checkbox" checked={payment ? false : true} defaultChecked={preOrder.toggle ? false : true} />
+                                            <span />
                                             <p>Робокасса</p>
                                         </label>}
                                     </div>
@@ -355,7 +351,7 @@ function Checkout() {
                                             <Link href="/login">Вход /</Link>
                                             <Link href="/registration"> Регистрация</Link>
                                         </div>
-                                    ) 
+                                    )
                                 }
                                 {
                                     usersData.address?.length ?
@@ -389,23 +385,23 @@ function Checkout() {
                                             <label className="input-text">Фамилия *<Field type="text" className="input" placeholder="Иванов" name="lastName" defaultValue={usersData.lastName} autoComplete="off" style={{ borderColor: errors.lastName && touched.lastName ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label>
                                             <label className="input-text">Имя *<Field type="text" className="input" placeholder="Иван" name="name" defaultValue={usersData.name} autoComplete="off" style={{ borderColor: errors.name && touched.name ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label>
                                             <label className="input-text">Отчество<Field type="text" className="input" placeholder="Иванович" autoComplete="off" name="fatherName" style={{ borderColor: errors.fatherName && touched.fatherName ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label>
-                                            <label className="input-text" style={{color: cloneEmail ? "red" : "rgba(51, 51, 51, 0.6)"}}>
+                                            <label className="input-text" style={{ color: cloneEmail ? "red" : "rgba(51, 51, 51, 0.6)" }}>
                                                 {cloneEmail ? "Данный E-Mail уже зарегистрирован!" : "Эл. адрес *"}
-                                                <Field 
-                                                    type="text" 
-                                                    className="input" 
-                                                    placeholder="ivan.ivanovich@gmail.com" 
-                                                    defaultValue={usersData.email} 
-                                                    name="email" 
-                                                    autoComplete="off" 
-                                                    style={{ borderColor: errors.email && touched.email || cloneEmail ? 'red' : '#EDEDED' }} 
-                                                    onChange={handleChange} 
-                                                    onBlur={handleBlur} 
+                                                <Field
+                                                    type="text"
+                                                    className="input"
+                                                    placeholder="ivan.ivanovich@gmail.com"
+                                                    defaultValue={usersData.email}
+                                                    name="email"
+                                                    autoComplete="off"
+                                                    style={{ borderColor: errors.email && touched.email || cloneEmail ? 'red' : '#EDEDED' }}
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
                                                 />
-                                                </label>
+                                            </label>
                                             <label className="input-text">Телефон *<Field type="text" className="input" placeholder="+791 502 31111" defaultValue={usersData.phone} name="phone" autoComplete="off" style={{ borderColor: errors.phone && touched.phone ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label>
                                             {/* <label className="input-text">Компания<Field type="text" className="input" placeholder="TESTWEB" defaultValue={usersData.company && usersData.company} name="company" autoComplete="off" style={{ borderColor: errors.company && touched.company ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label> */}
-                                            <label className="input-text">Адрес *<Field type="text" className="input" placeholder="Адрес" defaultValue={usersData.address_1 && usersData.address_1} name="address_1" autoComplete="off" style={{ borderColor: errors.address_1 && touched.address_1 ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label>
+                                            {/* <label className="input-text">Адрес *<Field type="text" className="input" placeholder="Адрес" defaultValue={usersData.address_1 && usersData.address_1} name="address_1" autoComplete="off" style={{ borderColor: errors.address_1 && touched.address_1 ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label> */}
                                             {/* <label className="input-text">Адрес 2<Field type="text" className="input" placeholder="Адрес 2" defaultValue={usersData.address_2 && usersData.address_2} name="address_2" autoComplete="off" style={{ borderColor: errors.address_2 && touched.address_2 ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label> */}
                                             <label className="input-text">Город *<Field type="text" className="input" placeholder="Город" defaultValue={usersData.city && usersData.city} name="city" autoComplete="off" style={{ borderColor: errors.city && touched.city ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label>
                                             {/* <label className="input-text">Почтовый индекс *<Field type="text" className="input" placeholder={125009} defaultValue={usersData.post && usersData.post} name="post" autoComplete="off" style={{ borderColor: errors.post && touched.post ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label> */}
@@ -438,7 +434,7 @@ function Checkout() {
                                     </p>
                                 </div>
                                 <label className="input-btn">
-                                    <input type="submit" value={ preOrder.toggle ? 'Забронировать' :'Оформить заказ'} defaultValue="Оформить заказ" className="input" />
+                                    <input type="submit" value={preOrder.toggle ? 'Забронировать' : 'Оформить заказ'} defaultValue="Оформить заказ" className="input" />
                                 </label>
                             </div>
                         </Form>
