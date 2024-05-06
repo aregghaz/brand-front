@@ -9,10 +9,8 @@ import Products from "../components/Products/Products";
 import { useEffect, useState } from "react";
 import Brendcrumbs from "../components/Brendcrumbs/Brendcrumbs"
 import axios from "axios";
-import {fetchCategory} from "@/store/slices/category/categoryApi";
 export async function getStaticProps(context) {
-    const dispatch = useDispatch()
-  const res=   dispatch(fetchCategory({limit: 20}))
+    const res = await axios.get( `https://back.brend-instrument.ru/api/category`);
 
     return {
         // will be passed to the page component as props
