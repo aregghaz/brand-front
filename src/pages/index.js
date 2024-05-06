@@ -21,12 +21,13 @@ export default function Home() {
     const {categoryData} = useSelector(selectCategory)
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        if (window.innerWidth < 1025) {
-            dispatch(fetchCategory({limit: 20}))
-            setCategory(!category)
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (window.innerWidth < 1025) {
+    //         dispatch(fetchCategory({limit: 20}))
+    //
+    //         setCategory(!category)
+    //     }
+    // }, [])
     return (
         <>
             {category && (

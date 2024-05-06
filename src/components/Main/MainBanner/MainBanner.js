@@ -5,21 +5,30 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { selectBanners } from '../../../store/slices/banners/bannersSlice';
 import { fetchBannerSlides } from '../../../store/slices/banners/bannersApi';
 import { selectProducts } from '../../../store/slices/products/productsSlice';
+import useSWR from "swr";
+import {fetcher} from "@/store/slices/category/categoryApi";
 
 function MainBanner() {
   const [getBanners, setGetBanners] = useState(false)
-  const {bannerSlidesData} = useSelector(selectBanners)
+  const {data: bannerSlidesData} =  useSWR(
+      `https://back.brend-instrument.ru/api/get-banners`,
+      fetcher
+  )
+//  const {bannerSlidesData} = useSelector(selectBanners)
   const {topProductsData} = useSelector(selectProducts)
   const dispatch = useDispatch()
   useEffect(() => {
-    if(bannerSlidesData.length) {
+    if(true) {
       return setGetBanners(true)
     }
+    console.log(getBanners,'getBanners')
     if(!getBanners) {
-      dispatch(fetchBannerSlides())
+
+     /// setbannerSlidesData(bannersData)
       setGetBanners(false)
     }
   }, [bannerSlidesData])
+  console.log(bannerSlidesData,'bannerSlidesData')
   return (
     <div className="main__banner" style={{maxWidth: topProductsData.length < 1 ? "100%" : ""}}>
       <Swiper >
