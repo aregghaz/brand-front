@@ -35,7 +35,7 @@ function Videos() {
                         videosData?.data?.map(el => (
                             <SwiperSlide key={el.id}>
                                 <div className='videos__item'>
-                                    <iframe src={el.video} allow="fullscreen;" referrerpolicy="strict-origin-when-cross-origin" />
+                                    <iframe src={el.video} allow="fullscreen;" referrerPolicy="strict-origin-when-cross-origin" />
                                 </div>
                             </SwiperSlide>
                         ))

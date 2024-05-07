@@ -18,8 +18,8 @@ function ProductItem({ title, img, price, salePrice, id, slug }) {
     const router = useRouter();
     const { loginData } = useSelector(selectUsers);
 
-    const {uuId} = useSelector(selectLiked)
-    const {guestUserId} = useSelector(selectCart)
+    const { uuId } = useSelector(selectLiked)
+    const { guestUserId } = useSelector(selectCart)
 
     const addToCart = useCallback(() => {
         dispatch(fetchAddToCart({ productCount: "1", productId: id, userToken: loginData.access_token ? loginData.access_token : null, guestUserId: guestUserId }));
@@ -38,16 +38,16 @@ function ProductItem({ title, img, price, salePrice, id, slug }) {
     }, [uuId]);
     return (
         <>
-            
+
             <div className="product-item">
-                <Link href={`/product/${slug}`} style={{backgroundImage: img && "url("+img+")"}} className="product-item__img" onClick={() => {dispatch(fetchSingleProduct({ slug }))}} scroll={false}>
+                <Link href={`/product/${slug}`} style={{ backgroundImage: img && "url(" + img + ")" }} className="product-item__img" onClick={() => { dispatch(fetchSingleProduct({ slug })) }} scroll={false}>
                     {salePrice > 0 && <div
                         className="discount_div">- {(100 - (salePrice * 100) / price)} %</div>}
                     <img src={img} alt={title} />
                 </Link>
                 <div className="product-item__text">
                     <h4>
-                        <Link href={`/product/${slug}`} onClick={() => {dispatch(fetchSingleProduct({ slug }))}} scroll={false} title={title}>{title}</Link>
+                        <Link href={`/product/${slug}`} onClick={() => { dispatch(fetchSingleProduct({ slug })) }} scroll={false} title={title}>{title}</Link>
                     </h4>
                     <div className="product-item__prices">
                         {salePrice ? (
@@ -75,7 +75,7 @@ function ProductItem({ title, img, price, salePrice, id, slug }) {
                                 <RemoveWishListIcon />
                             </button>
                         )}
-                        <Link href="/checkout" onClick={() => dispatch(preOrder({id: id, price: salePrice ? salePrice : price, name: title, toggle: true}))}>
+                        <Link href="/checkout" onClick={() => dispatch(preOrder({ id: id, price: salePrice ? salePrice : price, name: title, toggle: true }))}>
                             <BronIcon />
                         </Link>
                         {/* <Link href="/">

@@ -63,7 +63,7 @@ function VideosPage() {
                             {
                                 videosData?.data?.map(el => (
                                     <div className='videos__item' key={el.id} >
-                                        <iframe src={el.video} referrerpolicy="strict-origin-when-cross-origin" />
+                                        <iframe src={el.video} referrerPolicy="strict-origin-when-cross-origin" />
                                     </div>
                                 ))
                             }

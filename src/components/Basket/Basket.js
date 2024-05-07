@@ -32,6 +32,7 @@ function Basket() {
             setGetCart(true)
         }
         togglePrice()
+        console.log(cartData, "cartData");
     }, [getCart, cartData,totalPrice])
     return (
         <>
