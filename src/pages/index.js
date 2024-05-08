@@ -10,25 +10,31 @@ import HomeNews from "../components/HomeNews/HomeNews"
 import Faq from "../components/Faq/Faq"
 import Videos from "@/components/Videos/Videos";
 import Link from "next/link";
-import {fetchCategory, fetchSinglCategoryChildren, fetchSingleCategory} from "@/store/slices/category/categoryApi";
+import { fetchCategory, fetchSinglCategoryChildren, fetchSingleCategory } from "@/store/slices/category/categoryApi";
 import Image from "next/image";
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {selectCategory} from "@/store/slices/category/categorySlice";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCategory } from "@/store/slices/category/categorySlice";
+import PreOrderModal from "@/components/PreOrderModal/PreOrderModal";
+import { selectProducts } from "@/store/slices/products/productsSlice";
 
 export default function Home() {
     const [category, setCategory] = useState(false)
-    const {categoryData} = useSelector(selectCategory)
+    const { categoryData } = useSelector(selectCategory)
+    const {preOrderData} = useSelector(selectProducts)
     const dispatch = useDispatch()
 
     useEffect(() => {
         if (window.innerWidth < 1025) {
-            dispatch(fetchCategory({limit: 20}))
+            dispatch(fetchCategory({ limit: 20 }))
             setCategory(!category)
         }
     }, [])
     return (
         <>
+            {
+                preOrderData.id && <PreOrderModal />
+            }
             {category && (
                 <div className='hide-catalog-mobile'>
                     <ul className='hide-catalog__mobile_grid'>
@@ -38,13 +44,13 @@ export default function Home() {
                                     <Link
                                         className='category-mobile-title'
                                         href={`/categorySingl/${category.slug}`} onClick={() => {
-                                        dispatch(fetchSingleCategory({categorySlug: category.slug, limit: 20}));
-                                        dispatch(fetchSinglCategoryChildren({categoryId: category.id, limit: 20}))
-                                    }}
+                                            dispatch(fetchSingleCategory({ categorySlug: category.slug, limit: 20 }));
+                                            dispatch(fetchSinglCategoryChildren({ categoryId: category.id, limit: 20 }))
+                                        }}
                                     >{category.icon != 0 &&
                                         <span className='image-span'>  <Image src={"https://back.brend-instrument.ru" + category.icon}
-                                                       width={25}
-                                                       height={25}/></span>}<span>{category.title}</span></Link>
+                                            width={25}
+                                            height={25} /></span>}<span>{category.title}</span></Link>
                                 </li>
                             ))
                         }
@@ -52,19 +58,19 @@ export default function Home() {
                 </div>
             )
             }
-            <Main/>
-            <TopCategory/>
-            {!category && <Banner position={1}/>}
-            <Products idx={0} fetch={true}/>
-            <Advantage/>
-            <Products idx={1}/>
+            <Main />
+            <TopCategory />
+            {!category && <Banner position={1} />}
+            <Products idx={0} fetch={true} />
+            <Advantage />
+            <Products idx={1} />
             {/*<RequestProduct />*/}
             {/*<BuyingUp />*/}
-            <Brands/>
-            <TopBrend/>
-            <HomeNews/>
-            <Videos/>
-            <Faq/>
+            <Brands />
+            <TopBrend />
+            <HomeNews />
+            <Videos />
+            <Faq />
         </>
     );
 }

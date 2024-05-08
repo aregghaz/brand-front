@@ -374,6 +374,10 @@
               }
             }
 
+            button:disabled {
+              cursor: no-drop;
+            }
+
             a,
             .chek-btn {
               width: 100%;

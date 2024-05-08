@@ -39,7 +39,7 @@ function BasketTable() {
             {
                 cartData.length && 
                 cartData?.map((el, idx) => (
-                    <BasketItem key={el.id} image={el.attributes.image} price={el.price} quantity={el.quantity && el.quantity} number={idx+1} name={el.name} productId={el.id} removeBtn={true} maxCount={el.associatedModel?.quantity && el.associatedModel?.quantity} />
+                    <BasketItem key={el.id} image={el.attributes.image} price={el.price} quantity={el.quantity && el.quantity} number={idx+1} name={el.name} productId={el.id} removeBtn={true} maxCount={el.conditions?.quantity && el.conditions?.quantity} />
                 ))
             }
         </div>

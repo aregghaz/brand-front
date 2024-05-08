@@ -17,7 +17,6 @@ function ProductItem({ title, img, price, salePrice, id, slug }) {
     const [startAnim, setStartAnim] = useState(false);
     const router = useRouter();
     const { loginData } = useSelector(selectUsers);
-
     const { uuId } = useSelector(selectLiked)
     const { guestUserId } = useSelector(selectCart)
 
@@ -75,12 +74,15 @@ function ProductItem({ title, img, price, salePrice, id, slug }) {
                                 <RemoveWishListIcon />
                             </button>
                         )}
-                        <Link href="/checkout" onClick={() => dispatch(preOrder({ id: id, price: salePrice ? salePrice : price, name: title, toggle: true }))}>
+                        <button className='preorder-btn' onClick={() => {
+                            if (loginData.access_token) {
+                                dispatch(preOrder({ id: id, price: salePrice ? salePrice : price, name: title, toggle: true }))
+                            } else {
+                                router.push("/login")
+                            }
+                        }}>
                             <BronIcon />
-                        </Link>
-                        {/* <Link href="/">
-                            <ComprasionIcon />
-                        </Link> */}
+                        </button>
                     </div>
                 </div>
             </div>

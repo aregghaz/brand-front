@@ -7,7 +7,7 @@ const productsSlice = createSlice({
         productsByTagData: [],
         singlProductData: {},
         topProductsData: [],
-        preOrder: {
+        preOrderData: {
             id: "",
             price: "",
             toggle: false
@@ -21,10 +21,14 @@ const productsSlice = createSlice({
             }
         },
         preOrder: (state, {payload}) => {
-            state.preOrder.id = payload.id;
-            state.preOrder.price = payload.price / 100 * 10
-            state.preOrder.toggle = payload.toggle
-            state.preOrder.name = payload.name
+            if (payload) {
+                state.preOrderData.id = payload.id;
+                state.preOrderData.price = payload.price / 100 * 10
+                state.preOrderData.toggle = payload.toggle
+                state.preOrderData.name = payload.name
+            }else [
+                state.preOrderData = {}
+            ]
         }
     },
     extraReducers: (builder) => {

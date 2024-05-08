@@ -21,35 +21,22 @@ import { useRouter } from 'next/router';
 import SuccsesModal from '../SuccsesModal/SuccsesModal';
 import timestampToDate from "@/utils/dateTime";
 import Timer from '../Timer/Timer';
+import PreOrderModal from '../PreOrderModal/PreOrderModal';
 
 
 function ProductSingle({ slug }) {
-
     const swiperRef = useRef(null)
-
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
-
     const [isLoading, setIsLoading] = useState(false)
     const [getProduct, setGetProduct] = useState(false)
-
     const [toggleInfo, setToggleInfo] = useState(true)
-
-    const { loginData, usersData } = useSelector(selectUsers)
-
+    const { loginData } = useSelector(selectUsers)
     const dispatch = useDispatch()
-
-    const { singlProductData } = useSelector(selectProducts)
-
+    const { singlProductData, preOrderData } = useSelector(selectProducts)
     const addRef = useRef(null);
-
     const [startAnim, setStartAnim] = useState(false);
-
     const [appModal, setAppModal] = useState(false)
-
     const { guestUserId, cartData } = useSelector(selectCart)
-
     const { uuId } = useSelector(selectLiked)
-
     const router = useRouter()
 
     useEffect(() => {
@@ -74,7 +61,6 @@ function ProductSingle({ slug }) {
     }
 
     const addToCart = useCallback(() => {
-        console.log(guestUserId);
         dispatch(fetchAddToCart({
             productCount: singlProductData.count,
             productId: singlProductData.id,
@@ -83,7 +69,6 @@ function ProductSingle({ slug }) {
         }));
         setStartAnim(true);
         setTimeout(() => {
-            // dispatch(fetchCart({ userToken: loginData.access_token ? loginData.access_token : null, guestUserId: guestUserId }));
             setStartAnim(false);
         }, 1000);
     }, [guestUserId, loginData, cartData]);
@@ -106,7 +91,6 @@ function ProductSingle({ slug }) {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        console.log(singlProductData);
     }, [router])
 
     const toggleModals = (value) => {
@@ -126,6 +110,9 @@ function ProductSingle({ slug }) {
             {
                 isLoading ?
                     <>
+                        {
+                            preOrderData.id && <PreOrderModal />
+                        }
                         <Brendcrumbs title={singlProductData?.title} links={[...singlProductData.categories.map(el => {
                             return { name: el.name, link: `/categorySingl/${el.label}` }
                         })]} />
@@ -236,17 +223,18 @@ function ProductSingle({ slug }) {
                                                     {startAnim &&
                                                         <span className="product-item__animate" ref={addRef}>1</span>}
                                                 </button>
-                                                <Link
-                                                    href={singlProductData.book.length < singlProductData.quantity ? '/checkout' : `/product/${slug}`}
+                                                <button disabled={singlProductData.book.length < singlProductData.quantity ? false : true}
                                                     onClick={() => {
 
-                                                        if (singlProductData.book.length < singlProductData.quantity) {
+                                                        if (loginData.access_token) {
                                                             dispatch(preOrder({
                                                                 id: singlProductData.id,
                                                                 price: singlProductData.salePrice ? singlProductData.salePrice : singlProductData.price,
                                                                 name: singlProductData.title,
                                                                 toggle: true
                                                             }))
+                                                        } else {
+                                                            router.push("/login")
                                                         }
                                                     }}>
                                                     <BronIcon />
@@ -256,7 +244,7 @@ function ProductSingle({ slug }) {
                                                             <Timer endDate={new Date(singlProductData.book[0].created_at)} />
                                                         </>
                                                     }
-                                                </Link>
+                                                </button>
                                                 <button onClick={() => addToWishList()} style={{ color: "#0C96D1" }}>
                                                     <LikeIcon />
                                                     В избранное

@@ -54,7 +54,6 @@ function Checkout() {
             setGetUser(true)
         }
     }, [totalPrice, usersData])
-    const setAddtessType = useCallback(() => { },)
     const succesHandler = useCallback(() => {
         setToggleSucces(false)
     }, [])
