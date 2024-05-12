@@ -42,7 +42,6 @@ function Header() {
     //         setMobileSearch(!mobileSearch)
     //     }
     // }, [])
-    // console.log(mobileToggle,headerToggles,'mobileTogglemobileToggle')
 
     return (
         <>

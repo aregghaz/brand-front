@@ -36,7 +36,6 @@ function FilterItem({title, values, id, prices, filterDataArray, setFilterDataAr
         }
     }
 
-    console.log(values, 'values')
     return (
         <div className="catalog-single__filter-item">
             <div className="catalog-single__filter-title" onClick={() => setToggle(!toggle)}>

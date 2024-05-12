@@ -45,7 +45,7 @@ function MyRoom() {
     });
     const router = useRouter()
 
-
+    console.log(usersData);
     return (
         <>
             {usersData.id ?

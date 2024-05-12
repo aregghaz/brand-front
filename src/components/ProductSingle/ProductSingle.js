@@ -99,11 +99,7 @@ function ProductSingle({ slug }) {
 
     const convertDate = (date) => {
         var t = date.split(/[- :]/);
-        console.log(singlProductData.book[0].created_at, '11')
-        // Apply each element to the Date function
         var d = new Date(Date.UTC(t[0], t[1] - 1, t[2], t[3], t[4], t[5]));
-
-        console.log(d);
     }
     return (
         <>
@@ -212,7 +208,7 @@ function ProductSingle({ slug }) {
                                                         addToCart()
                                                     }
                                                 }
-                                                }>
+                                                } disabled={singlProductData.book.length >= singlProductData.quantity ? true : false}>
                                                     <svg width={20} height={20} viewBox="0 0 20 20" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path

@@ -74,7 +74,6 @@ function CatalogSingle({ slug }) {
     }
 
 
-    ///console.log(limit,singleCategoryData?.products?.length, 'limitlimit')
     return (
         <>
             {

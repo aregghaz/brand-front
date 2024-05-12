@@ -15,7 +15,6 @@ function OrderStory() {
     const [initialLength, setInitialLength] = useState(2)
 
     const showMore = useCallback(() => {
-        console.log(ordersStoryData.length + 5, initialLength + 5);
         if(loginData.access_token) {
             dispatch(fetchOrders({userToken: loginData.access_token, limit:  (ordersStoryData.length + 5), page: 1}))
         }

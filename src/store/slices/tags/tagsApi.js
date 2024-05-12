@@ -6,7 +6,6 @@ export const fetchTags = createAsyncThunk(
     "tags/fetchTags",
     async function ({fetch, limit}) {
         if(fetch) {
-            console.log(fetch);
             const {data: tagsData} = await axios.get(`https://back.brend-instrument.ru/api/getTags`);
             const tagsId = await tagsData.map(el => {
                 return el.id
