@@ -11,7 +11,7 @@ import { preOrder } from '../../store/slices/products/productsSlice';
 import { selectCart } from '../../store/slices/cart/cartSlice';
 import { useRouter } from 'next/router';
 
-function ProductItem({ title, img, price, salePrice, id, slug }) {
+function ProductItem({ title, img, price, salePrice, id, slug, total, book }) {
     const dispatch = useDispatch();
     const addRef = useRef(null);
     const [startAnim, setStartAnim] = useState(false);
@@ -34,6 +34,7 @@ function ProductItem({ title, img, price, salePrice, id, slug }) {
         setTimeout(() => {
             setStartAnim(false);
         }, 1000);
+        console.log(total > book.length);
     }, [uuId]);
     return (
         <>
@@ -60,10 +61,15 @@ function ProductItem({ title, img, price, salePrice, id, slug }) {
                     </div>
                     <Link href="/" className="credit-btn">Оформить кредит в магазине!</Link>
                     <div className="product-item__buttons">
-                        <button onClick={addToCart} className="buy-btn">
-                            <BasketIcon color={"#FFF"} />
-                            Купить
-                            {startAnim && <span className="product-item__animate" ref={addRef}>1</span>}
+                        <button onClick={addToCart} className="buy-btn" disabled={book?.length >= total ? true : false} style={{ maxWidth: book?.length >= total && "unset", backgroundColor: book?.length >= total && "#939393" }}>
+                            {
+                                book?.length >= total ? "Забронировано" :
+                                    <>
+                                        <BasketIcon color={"#FFF"} />
+                                        Купить
+                                        {startAnim && <span className="product-item__animate" ref={addRef}>1</span>}
+                                    </>
+                            }
                         </button>
                         {router.pathname !== "/liked" ? (
                             <button className="like-btn" onClick={addToWishList}>
@@ -74,15 +80,18 @@ function ProductItem({ title, img, price, salePrice, id, slug }) {
                                 <RemoveWishListIcon />
                             </button>
                         )}
-                        <button className='preorder-btn' onClick={() => {
-                            if (loginData.access_token) {
-                                dispatch(preOrder({ id: id, price: salePrice ? salePrice : price, name: title, toggle: true }))
-                            } else {
-                                router.push("/login")
-                            }
-                        }}>
-                            <BronIcon />
-                        </button>
+                        {
+                            book?.length >= total ? "" :
+                                <button className='preorder-btn' onClick={() => {
+                                    if (loginData.access_token) {
+                                        dispatch(preOrder({ id: id, price: salePrice ? salePrice : price, name: title, toggle: true }))
+                                    } else {
+                                        router.push("/login")
+                                    }
+                                }}>
+                                    <BronIcon />
+                                </button>
+                        }
                     </div>
                 </div>
             </div>

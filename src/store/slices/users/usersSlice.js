@@ -44,9 +44,10 @@ const loadStateFromCookie = () => {
 };
 
 const saveStateToCookie = (state) => {
-    document.cookie = `loginData=${JSON.stringify(state.loginData)}`;
-    document.cookie = `usersData=${JSON.stringify(state.usersData)}`;
+    document.cookie = `loginData=${JSON.stringify(state.loginData)}; SameSite=None; Secure`;
+    document.cookie = `usersData=${JSON.stringify(state.usersData)}; SameSite=None; Secure`;
 };
+
 
 const initialStateFromCookie = loadStateFromCookie();
 function clearAllCookies() {

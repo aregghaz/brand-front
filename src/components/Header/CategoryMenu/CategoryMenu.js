@@ -3,7 +3,6 @@ import Link from 'next/link'
 import React, {useCallback, useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {selectCategory} from '../../../store/slices/category/categorySlice'
-import Image from 'next/image'
 import {
     fetchCategory,
     fetchSinglCategoryChildren,
@@ -40,7 +39,7 @@ function CategoryMenu({headerToggleClick, setMobileToggle}) {
                                 dispatch(fetchSinglCategoryChildren({categoryId: category.id, limit: 20}))
                                 headerToggleClick(false);
                             }}
-                            >{category.icon != 0 && <Image src={"https://back.brend-instrument.ru" + category.icon} width={15} height={15}/>}{category.title}</Link>
+                            >{category.icon != 0 && <img src={"https://back.brend-instrument.ru" + category.icon}/>}{category.title}</Link>
                             <ul>
                                 {
                                     category.children?.map(el => (

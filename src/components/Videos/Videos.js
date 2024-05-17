@@ -14,14 +14,12 @@ function Videos() {
     const [getVideos, setGetVideos] = useState(false)
 
     useEffect(() => {
-        if(videosData?.data?.length) {
-            return setGetVideos(true)
-        }
-        if(!getVideos) {
+        if (!getVideos && !videosData?.data?.length) {
             dispatch(fetchVideos({page: 1, limit: 20}))
             setGetVideos(true)
         }
     }, [getVideos, videosData])
+    
 
     return (
         <section className='videos'>
@@ -30,7 +28,7 @@ function Videos() {
                     <h2>Видеообзоры</h2>
                     <Link href={"/videos"} >Смотреть все</Link>
                 </div>
-                <Swiper slidesPerView={'auto'} loop={true} className="swiper videos__swiper">
+                {/* <Swiper slidesPerView={'auto'} loop={videosData?.data?.length > 16 ? ture : false} className="swiper videos__swiper">
                     {
                         videosData?.data?.map(el => (
                             <SwiperSlide key={el.id}>
@@ -40,7 +38,7 @@ function Videos() {
                             </SwiperSlide>
                         ))
                     }
-                </Swiper>
+                </Swiper> */}
             </div>
         </section>
     )

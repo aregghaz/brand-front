@@ -1,5 +1,4 @@
 "use client"
-import Image from 'next/image'
 import React, { useCallback, useState } from 'react'
 import CallbackModal from '../CallbackModal/CallbackModal'
 import SuccsesModal from '../SuccsesModal/SuccsesModal'
@@ -15,7 +14,7 @@ function RequestProduct() {
                 <div className="request-product__container _container">
                     <h2>Заявка на подбор товара!</h2>
                     <div className="request-product__img">
-                        <Image src="https://brend-instrument.ru/img/ser-top 1.png" alt="img" width={418} height={274} />
+                        <img src="https://brend-instrument.ru/img/ser-top 1.png" alt="img" />
                     </div>
                     <button onClick={() => setModalToggle("callback")}>Связаться с менеджером</button>
                 </div>

@@ -32,7 +32,7 @@ function BasketItem({image, price, quantity, number, name, productId, removeBtn,
         <div className="basket__item">
             <p>{number}</p>
             <div className="basket__item-img">
-                <img src={"https://back.brend-instrument.ru" + image} alt='img' />
+                <img src={"https://back.brend-instrument.ru/" + image} alt='img' />
             </div>
             <h4>{name}</h4>
             <p className="price">{price} ₽</p>

@@ -5,9 +5,9 @@ import { fetchAddToCart, fetchCart, fetchDeleteCart, fetchUpdateCart } from "./c
 const updateCartData = (state, payload) => {
     state.cartData = [...Object.entries(payload.cart ? payload.cart : payload).map(e => e[1])];
     state.guestUserId = payload.uuid;
-    document.cookie = `guestUserId=${payload.uuid}`;
+    // Устанавливаем куки с атрибутом SameSite=None и Secure
+    document.cookie = `guestUserId=${payload.uuid}; SameSite=None; Secure`;
 };
-
 const initialState = {
     addToCartData: {},
     cartData: [],

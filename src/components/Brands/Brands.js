@@ -40,12 +40,12 @@ function Brands() {
                     <button className="slidenext" onClick={() => nextSlide()}>
                         <ArrowNext />
                     </button>
-                    <Swiper slidesPerView={'auto'} loop={true} className="swiper">
+                    <Swiper slidesPerView={'auto'} loop={topBrandsData.length > 16 ? true : false} className="swiper">
                         {
                             topBrandsData.map(el => (
                                 <SwiperSlide key={el.id} className="swiper-slide">
                                     <Link href={`/brandSingle/${el.slug}`} onClick={() => window.scrollTo(0, 0)}>
-                                        <BrandsItem id={el.id} title={el.title} img={"https://back.brend-instrument.ru" + el.image} onClick={() => fetchSinglBrend(el.id)} />
+                                        <BrandsItem id={el.id} title={el.title} img={el.image && "https://back.brend-instrument.ru/" + el.image} onClick={() => fetchSinglBrend(el.id)} />
                                     </Link>
                                 </SwiperSlide>
                             ))

@@ -22,6 +22,7 @@ export const fetchSingleCategory = createAsyncThunk(
     "category/fetchSingleCategory",
     async function ({categorySlug, limit}) {
         const {data: singleCategoryData} = await axios.get(`https://back.brend-instrument.ru/api/singleCat/${categorySlug}/${limit ? limit : 20}`, {headers: {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"}})
+        console.log(singleCategoryData);
         return singleCategoryData
     }
 )

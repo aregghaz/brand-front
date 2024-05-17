@@ -15,6 +15,7 @@ import SuccsesModal from '../SuccsesModal/SuccsesModal';
 import Link from "next/link"
 import { fetchCart } from '../../store/slices/cart/cartApi';
 import { DetailIcon, PaymentIcon } from '@/svg';
+
 function Checkout() {
     const { usersData, loginData } = useSelector(selectUsers)
     const [getUser, setGetUser] = useState(false)
@@ -266,7 +267,7 @@ function Checkout() {
                                                     onBlur={handleBlur}
                                                 />
                                             </label>
-                                            <label className="input-text">Телефон *<Field type="text" className="input" placeholder="+791 502 31111" defaultValue={usersData.phone} name="phone" autoComplete="off" style={{ borderColor: errors.phone && touched.phone ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label>
+                                            <label className="input-text">Телефон *<InputMask type="text" mask="+7 (999) 999-99-99" className="input" placeholder="+791 502 31111" defaultValue={usersData.phone} name="phone" autoComplete="off" style={{ borderColor: errors.phone && touched.phone ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label>
                                             <label className="input-text">Город *<Field type="text" className="input" placeholder="Город" defaultValue={usersData.city && usersData.city} name="city" autoComplete="off" style={{ borderColor: errors.city && touched.city ? 'red' : '#EDEDED' }} onChange={handleChange} onBlur={handleBlur} /></label>
                                         </div>
                                 }

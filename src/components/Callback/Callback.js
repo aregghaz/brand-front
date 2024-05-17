@@ -1,6 +1,5 @@
 "use client"
 import axios from 'axios'
-import Image from 'next/image'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { selectUsers } from '../../store/slices/users/usersSlice'
@@ -41,7 +40,7 @@ function Callback() {
                         </form>
                     </div>
                     <div className="callback__img">
-                        <Image src="https://brend-instrument.ru/img/image.png" alt="img" width={644} height={492} />
+                        <img src="https://brend-instrument.ru/img/image.png" alt="img"/>
                     </div>
                 </div>
             </section>

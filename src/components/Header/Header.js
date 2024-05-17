@@ -9,7 +9,6 @@ import CategoryMenu from './CategoryMenu/CategoryMenu';
 import CartBtn from './CartBtn/CartBtn';
 import UserBtn from './UserBtn/UserBtn';
 import HeaderMobile from './HeaderMobile/HeaderMobile';
-import Image from 'next/image';
 import HeaderSearch from './HeaderSearch/HeaderSearch';
 import ContactsLink from './ContactsLink/ContactsLink';
 
@@ -107,8 +106,8 @@ function Header() {
                             </button>
                             <HeaderMobile {...{ mobileToggle, setMobileToggle, headerToggles, headerToggleClick }} />
                             <Link href="/" className="logo">
-                                <Image src="https://brend-instrument.ru/img/logo-i-gray-262x97 1 (1).png" alt={'asd'} width={172} height={70} className='logo1' />
-                                <Image src="https://brend-instrument.ru/img/logo-i-gray-262x97 2@2x.png" alt={'asd'} width={172} height={70} className='logo2' />
+                                <img src="https://brend-instrument.ru/img/logo-i-gray-262x97 1 (1).png" alt={'brand-instrument'} className='logo1' />
+                                <img src="https://brend-instrument.ru/img/logo-i-gray-262x97 2@2x.png" alt={'brand-instrument'} className='logo2' />
                             </Link>
                             <button className="catalog-btn" onClick={() => headerToggleClick(headerToggles ? null : "catalogLinks")}>
                                 <BurgerIcon />

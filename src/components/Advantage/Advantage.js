@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React from "react";
 import { EarthIcon, ProductsIcon, SaleIcon, StarPremiumIcon } from "../../svg";
 
@@ -48,7 +47,7 @@ function Advantage() {
                     </div>
                 </div>
                 <div className="advantages__img">
-                    <Image src={"https://brend-instrument.ru/img/image 5.png"} width={500} height={500} alt={"Picture of the author"} />
+                    <img src={"https://brend-instrument.ru/img/image 5.png"} width={500} height={500} alt={"Picture of the author"} />
                 </div>
             </div>
         </section>

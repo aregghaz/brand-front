@@ -75,7 +75,7 @@ function OrderSingle({ id }) {
                                     <p>Дата заказа:<span>{formatDateTime(orderSingleData.created_at)}</span></p>
                                     <p>Статус:<span>{orderSingleData.status === "1" ? "В обработке" : orderSingleData.status === "2" ? "Забронирован" : "Доставлен"}</span></p>
                                     <p>Телефон получателя:<span>{orderSingleData.user.phone}</span></p>
-                                    <p>Адрес:<span>{orderSingleData.address.address_1}</span></p>
+                                    <p>Город:<span>{orderSingleData.city}</span></p>
                                     <p>Дата и время доставки:<span>Март 12, 2023, 13:20</span></p>
                                     <p className="comments">Примечания<span>{orderSingleData.note}</span></p>
                                 </div>

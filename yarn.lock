@@ -8991,6 +8991,11 @@ react-fast-compare@^2.0.1:
   resolved "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-2.0.4.tgz"
   integrity sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==
 
+react-input-mask-hook@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/react-input-mask-hook/-/react-input-mask-hook-1.0.0.tgz"
+  integrity sha512-ywJ/5N2oIBs0WZ9NiiDxnmgxIafhB2BIJFrGgL+S3z2lr8SDxU41BY/IdBBuwSVJ5QHZMf7Og3kMgNC1CZ4Igg==
+
 react-input-mask@^2.0.4:
   version "2.0.4"
   resolved "https://registry.npmjs.org/react-input-mask/-/react-input-mask-2.0.4.tgz"

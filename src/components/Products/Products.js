@@ -29,10 +29,10 @@ function Products({idx, fetch}) {
                         </div>
                         <div className="products__swiper">
                             {
-                                <Swiper slidesPerView={'auto'} loop={true} className="swiper">
+                                <Swiper slidesPerView={'auto'} loop={tagsData[idx].products.length > 16 ? true : false} className="swiper">
                                     {
                                         tagsData[idx].products.map(el => (
-                                            <SwiperSlide key={el?.id} className="swiper-slide"><ProductItem title={el?.title && el.title} img={"https://back.brend-instrument.ru" + el?.image} price={el?.price} salePrice={el?.special_price === 0 ? false : el?.special_price} slug={el?.slug} id={el.id} /></SwiperSlide>
+                                            <SwiperSlide key={el?.id} className="swiper-slide"><ProductItem title={el?.title && el.title} img={el?.image && "https://back.brend-instrument.ru" + el?.image} price={el?.price} salePrice={el?.special_price === 0 ? false : el?.special_price} slug={el?.slug} id={el.id} book={el.book} total={el.quantity} /></SwiperSlide>
                                         ))
                                     }
                                 </Swiper>

@@ -4,7 +4,6 @@ import ProductItem from "../ProductItem/ProductItem"
 import { useDispatch, useSelector } from 'react-redux';
 import { selectBrands } from '../../store/slices/brands/brandsSlice';
 import { fetchTopBrand } from '../../store/slices/brands/brandsApi';
-import axios from 'axios';
 import Link from 'next/link';
 
 function TopBrend() {
@@ -33,7 +32,7 @@ function TopBrend() {
                     <div className="top-brned__products">
                         {
                             topBrandData?.products?.map(el => (
-                                <ProductItem key={el.id}  title={el.title} img={"https://back.brend-instrument.ru" + el.image} price={el.price} salePrice={el.special_price === 0 ? false : el.special_price} id={el.id} slug={el.slug} />
+                                <ProductItem key={el.id} book={el.book} total={el.quantity} title={el.title} img={"https://back.brend-instrument.ru" + el.image} price={el.price} salePrice={el.special_price === 0 ? false : el.special_price} id={el.id} slug={el.slug} />
                             ))
                         }
                     </div>

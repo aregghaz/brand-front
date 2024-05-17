@@ -11,7 +11,6 @@ import Faq from "../components/Faq/Faq"
 import Videos from "@/components/Videos/Videos";
 import Link from "next/link";
 import { fetchCategory, fetchSinglCategoryChildren, fetchSingleCategory } from "@/store/slices/category/categoryApi";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCategory } from "@/store/slices/category/categorySlice";
@@ -21,7 +20,7 @@ import { selectProducts } from "@/store/slices/products/productsSlice";
 export default function Home() {
     const [category, setCategory] = useState(false)
     const { categoryData } = useSelector(selectCategory)
-    const {preOrderData} = useSelector(selectProducts)
+    const { preOrderData } = useSelector(selectProducts)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -48,9 +47,8 @@ export default function Home() {
                                             dispatch(fetchSinglCategoryChildren({ categoryId: category.id, limit: 20 }))
                                         }}
                                     >{category.icon != 0 &&
-                                        <span className='image-span'>  <Image src={"https://back.brend-instrument.ru" + category.icon}
-                                            width={25}
-                                            height={25} /></span>}<span>{category.title}</span></Link>
+                                        <span className='image-span'>  <img src={"https://back.brend-instrument.ru" + category.icon} /></span>}<span>{category.title}</span>
+                                    </Link>
                                 </li>
                             ))
                         }

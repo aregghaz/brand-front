@@ -341,7 +341,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-gap: 24px 20px;
-
+            
             @media(max-width: $md2) {
               grid-gap: 10px;
             }
@@ -360,7 +360,17 @@
               font-weight: 600;
               line-height: normal;
               position: relative;
+              .main__sale-time {
+                position: absolute;
+                left: 0;
+                bottom: -28px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 6px;
+                width: 100%;
 
+              }
               &:first-child {
                 border-radius: 5px;
                 background: #0C96D1;

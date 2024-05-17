@@ -1,5 +1,4 @@
 "use client"
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { useDispatch } from 'react-redux'
@@ -16,7 +15,7 @@ function NewsItem({id, img, title, day, year, mounth, slug}) {
     return (
         <div className="news-item">
             <Link href={`/newsSingl/${slug}`} className="news-item__img" onClick={handlerGetSingl}>
-                <Image src={ "https://back.brend-instrument.ru/" + img} alt="#"  width={268} height={206}/>
+                <img src={ "https://back.brend-instrument.ru/" + img} alt="#"/>
             </Link>
             <div className="news-item__text">
                 <span>{day}.{mounth}.{year} </span>

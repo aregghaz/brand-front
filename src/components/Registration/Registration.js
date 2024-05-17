@@ -1,6 +1,5 @@
 "use client"
 import { Formik, Field, Form } from 'formik';
-import Image from 'next/image';
 import * as yup from 'yup';
 import InputMask from 'react-input-mask';
 import axios from 'axios';

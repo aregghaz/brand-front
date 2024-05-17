@@ -120,7 +120,7 @@ function ProductSingle({ slug }) {
                                         {singlProductData.special_price > 0 && <div
                                             className="discount_div">- {(100 - (singlProductData.special_price * 100) / singlProductData.price)} %</div>}
                                         <Swiper className="produc-single__swiper"
-                                            loop={true}
+                                            loop={singlProductData?.images?.length > 10 ? true : false}
                                             spaceBetween={10}
                                             modules={[Thumbs]}
                                             ref={swiperRef}>
@@ -143,7 +143,7 @@ function ProductSingle({ slug }) {
                                             </button>
                                             <Swiper
                                                 modules={[Thumbs]}
-                                                loop={true}
+                                                loop={singlProductData?.images?.length > 10 ? true : false}
                                                 spaceBetween={10}
                                                 slidesPerView={4}
                                                 freeMode={true}

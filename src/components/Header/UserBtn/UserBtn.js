@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { selectUsers } from '../../../store/slices/users/usersSlice'
 import Link from 'next/link'
@@ -7,14 +7,19 @@ import { UserIcon } from '../../../svg'
 
 function UserBtn() {
   const {usersData} = useSelector(selectUsers)
-  useEffect(() => {}, [usersData])
+  const [userName, setUserName] = useState(null)
+  useEffect(() => {
+    if(usersData.name) {
+      setUserName(usersData.name)
+    }
+  }, [usersData])
   return (
     <>
       {
-        usersData?.name ?
+        userName ?
           <Link href={"/personalRoom"}>
             <UserIcon />
-            <span>{usersData.name}</span>
+            <span>{userName}</span>
           </Link> :
           <Link href="/login">
             <UserIcon />

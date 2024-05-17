@@ -140,6 +140,7 @@ const categorySlice = createSlice({
                         name: el.title
                     }))
                 ];
+                console.log(state.singleCategoryData.products);
             }
         })
         builder.addCase(fetchSortCategory.fulfilled, (state, {payload}) => {

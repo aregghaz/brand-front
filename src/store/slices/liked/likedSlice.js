@@ -4,8 +4,10 @@ import { fetchLiked, fetchLikedAdd, fetchLikedRemove } from "./likedApi";
 const updateLikedData = (state, payload) => {
     state.likedData = [...Object.entries(payload.cart ? payload.cart : payload).map(e => e[1])];
     state.uuId = payload.uuid;
-    document.cookie = `uuId=${payload.uuid}`;
+    // Устанавливаем куки с атрибутом SameSite=None и Secure
+    document.cookie = `uuId=${payload.uuid}; SameSite=None; Secure`;
 };
+
 
 const loadStateFromCookie = () => {
     try {

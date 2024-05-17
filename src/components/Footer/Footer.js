@@ -1,5 +1,4 @@
 "use client"
-import Image from 'next/image'
 import Link from 'next/link'
 import React, { useCallback, useRef, useState } from 'react'
 import { LocateIcon, PhoneIcon, TikTokIcon, VkIcon, WpIcon, YoutubeIcon } from '../../svg'
@@ -25,7 +24,7 @@ function Footer() {
         const [{ value: mail },] = subscribeRef.current
 
         await axios.get(`https://back.brend-instrument.ru/api/subscription/${mail}`).then(res => {
-            if(res.status === 200) {
+            if (res.status === 200) {
                 setToggleSuccses(true)
             }
         })
@@ -34,7 +33,7 @@ function Footer() {
         const { value } = e.target;
         setErrorMail(!validateEmail(value))
     }
-    const toggleSuccsesHandler = useCallback(() => {setToggleSuccses(false)}, [])
+    const toggleSuccsesHandler = useCallback(() => { setToggleSuccses(false) }, [])
     return (
         <>
             <footer className="footer">
@@ -77,10 +76,10 @@ function Footer() {
                             <div className="footer__item">
                                 <h4>Информация</h4>
                                 <ul>
-                                <li><Link href="/delivery">Доставка и оплата</Link></li>
+                                    <li><Link href="/delivery">Доставка и оплата</Link></li>
                                     <li><Link href="/payment">Продажа и оплата</Link></li>
                                     <li><Link href="/buyInstrument">Скупка инструмента</Link></li>
-                                     <li><Link href="/terms-of-cooperation">Условия Сотрудничества</Link></li>
+                                    <li><Link href="/terms-of-cooperation">Условия Сотрудничества</Link></li>
                                 </ul>
                             </div>
                             <div className="footer__item">
@@ -114,7 +113,7 @@ function Footer() {
                             </div>
                             <div className="cards">
                                 <p>Принимаем к оплате:</p>
-                                <Image src="https://brend-instrument.ru/img/Group 48096099.png" width={206} height={36} alt='cards' />
+                                <img src="https://brend-instrument.ru/img/Group 48096099.png" alt='cards' />
                             </div>
                         </div>
                     </div>

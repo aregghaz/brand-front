@@ -9,7 +9,6 @@ import { selectCategory } from '../../../store/slices/category/categorySlice';
 import parse from 'html-react-parser';
 
 import Link from 'next/link';
-import Image from 'next/image';
 
 function HeaderSearch({ headerToggles, headerToggleClick, mobileSearch, setMobileSearch }) {
     const [category, setCategory] = useState(false)
@@ -69,8 +68,7 @@ function HeaderSearch({ headerToggles, headerToggleClick, mobileSearch, setMobil
                                 return count >= index && (<div key={el.id} className='header__search-item'>
                                     <Link href={`/product/${el.slug}`} className='img'
                                         onClick={() => productLinkClick(el.slug)}>
-                                        <Image src={"https://back.brend-instrument.ru/" + el.image} alt={el.title}
-                                            width={60} height={60} />
+                                        <img src={"https://back.brend-instrument.ru/" + el.image} alt={el.title} />
                                     </Link>
                                     <h4>
                                         <Link href={`/product/${el.slug}`} onClick={() => {

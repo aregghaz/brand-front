@@ -22,6 +22,7 @@
     "react-dom": "^18.2.0",
     "react-fancybox": "^0.2.5",
     "react-input-mask": "^2.0.4",
+    "react-input-mask-hook": "^1.0.0",
     "react-loader-spinner": "^6.1.6",
     "react-redux": "^9.1.0",
     "react-redux-provider-consumer": "^1.1.0",

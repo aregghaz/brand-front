@@ -202,6 +202,9 @@
 				font-weight: 600;
 				position: relative;
 				line-height: normal;
+				&:disabled {
+					cursor: no-drop;
+				}
 			}
 
 			.like-btn { 
