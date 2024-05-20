@@ -19,6 +19,7 @@ function OrderStoryTable() {
                 setGetOrders(true)
             }
         }
+        console.log(loginData);
     }, [getOrders, ordersStoryData, loginData])
     return (
         <table className="orders-table" cellSpacing={0} cellPadding={0}>

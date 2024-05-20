@@ -30,6 +30,8 @@ function MyRoom() {
     //     mask: '+7 (999) 999-99-99',
     // });
 
+    console.log(usersData);
+
     const validationSchema = yup.object().shape({
         name: yup.string().required('Обязательное поле'),
         lastName: yup.string().required('Обязательное поле'),

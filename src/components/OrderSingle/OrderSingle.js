@@ -42,7 +42,7 @@ function OrderSingle({ id }) {
                                     </div>
                                     {
                                         orderSingleData?.products?.map((el, idx) => (
-                                            <BasketItem key={el.item.id} removeBtn={false} image={el.item.image} price={el.item.price} quantity={el.item.quantity} number={idx+1} name={el.item.name} productId={el.item.id} />
+                                            <BasketItem key={el.item.id} removeBtn={false} image={el.item.image} price={el.item.price} quantity={el.item.quantity} orderQuantity={el.quantity} number={idx+1} name={el.item.name} productId={el.item.id} />
                                         ))
                                     }
                                 </div>

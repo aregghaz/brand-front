@@ -140,7 +140,7 @@ function Checkout() {
                                     }
                                 })
                                 if (regData.access_token) {
-                                    dispatch(logIn({ loginData: regData.access_token, save: true }))
+                                    dispatch(logIn({ loginData: regData, save: true }))
                                     dispatch(fetchUser({ userToken: regData.access_token }))
                                     await axios.post(`https://back.brend-instrument.ru/api/auth/create-order`,
                                         {
@@ -222,25 +222,25 @@ function Checkout() {
                                     )
                                 }
                                 {
-                                    usersData.address?.length ?
-                                        <>
-                                            <label className="checkbox" onClick={() => { setAddress(true) }}>
-                                                <input type="checkbox" checked={address ? true : false} />
-                                                <span />
-                                                <p>Я хочу использовать существующий адрес</p>
-                                            </label>
-                                            {
-                                                address ?
-                                                    usersData.address.map(el => (
-                                                        <label className="checkbox address-checkbox" key={el.id} onClick={() => dispatch(toggleAddress({ id: el.id }))}>
-                                                            <input type="checkbox" checked={el.checked} />
-                                                            <span />
-                                                            <p>{el.name}, {el.address_1} {el.phone} </p>
-                                                        </label>
-                                                    )) : ""
-                                            }
-                                        </>
-                                        : ""
+                                    // usersData.address?.length ?
+                                    //     <>
+                                    //         <label className="checkbox" onClick={() => { setAddress(true) }}>
+                                    //             <input type="checkbox" checked={address ? true : false} />
+                                    //             <span />
+                                    //             <p>Я хочу использовать существующий адрес</p>
+                                    //         </label>
+                                    //         {
+                                    //             address ?
+                                    //                 usersData.address.map(el => (
+                                    //                     <label className="checkbox address-checkbox" key={el.id} onClick={() => dispatch(toggleAddress({ id: el.id }))}>
+                                    //                         <input type="checkbox" checked={el.checked} />
+                                    //                         <span />
+                                    //                         <p>{el.name}, {el.address_1} {el.phone} </p>
+                                    //                     </label>
+                                    //                 )) : ""
+                                    //         }
+                                    //     </>
+                                    //     : ""
                                 }
                                 {/* <label className="checkbox" onClick={() => setAddress(false)}>
                                     <input type="checkbox" checked={address ? false : true} />

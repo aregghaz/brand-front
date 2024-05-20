@@ -84,7 +84,6 @@ function Header() {
                             <ul className="menu">
                                 <li><Link href="/category">Каталог</Link></li>
                                 <li><Link href="/delivery">Доставка и оплата</Link></li>
-                                <li><Link href="/sale">Акции {/*<span className="total">210</span>*/}</Link></li>
                             </ul>
                         </div>
                         <div className="header__contacts">

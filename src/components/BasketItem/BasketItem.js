@@ -7,7 +7,7 @@ import { selectUsers } from '../../store/slices/users/usersSlice';
 import { MinusIcon, PlusIcon, RemoveIcon } from '../../svg';
 import { useRouter } from 'next/router';
 
-function BasketItem({image, price, quantity, number, name, productId, removeBtn, maxCount}) {
+function BasketItem({image, price, quantity, number, name, productId, removeBtn, maxCount, orderQuantity}) {
     const {loginData} = useSelector(selectUsers)
     const {guestUserId} = useSelector(selectCart)
     const dispatch = useDispatch()
@@ -49,11 +49,11 @@ function BasketItem({image, price, quantity, number, name, productId, removeBtn,
                                     <PlusIcon />
                                 </button>
                             </>
-                        ) : (<span>{quantity}</span>)
+                        ) : (<span>{orderQuantity ? orderQuantity : quantity}</span>)
                     }
                 </div>
             </div>
-            <p className="total-price">{quantity * price} ₽</p>
+            <p className="total-price">{orderQuantity ? (orderQuantity * price) : (quantity * price)} ₽</p>
             {
                 pathname !== "/checkout" && pathname !== "/orderSingle/[id]" ?
                 <button className="remove-btn" onClick={() => removeProduct(productId)}>
