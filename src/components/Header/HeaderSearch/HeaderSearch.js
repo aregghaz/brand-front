@@ -20,10 +20,11 @@ function HeaderSearch({ headerToggles, headerToggleClick, mobileSearch, setMobil
     const [count, setCount] = useState(4)
     const searchSubmit = (e) => {
         e.preventDefault()
-        dispatch(fetchSearch({ value: searchRef.current[0].value }))
-        dispatch(toggleSearchValue(searchRef.current[0].value))
-        headerToggleClick(headerToggles ? null : "searchToggle")
-        if (!searchRef.current[0].value.split("").length) {
+        if (searchRef.current[0].value.length > 2) {
+            dispatch(fetchSearch({ value: searchRef.current[0].value }))
+            dispatch(toggleSearchValue(searchRef.current[0].value))
+            headerToggleClick(headerToggles ? null : "searchToggle")
+        }else {
             headerToggleClick(null)
         }
     }
@@ -42,14 +43,16 @@ function HeaderSearch({ headerToggles, headerToggleClick, mobileSearch, setMobil
             <form ref={searchRef} onSubmit={searchSubmit}>
                 <label htmlFor={'asd'} className="input-text">
                     <input type="text" placeholder="Поиск по товарам..." onFocus={(e) => {
-                        headerToggleClick(headerToggles ? null : "searchToggle")
-                        if (!e.target.value.split("").length) {
+                        if (e.target.value.split("").length > 2) {
+                            headerToggleClick(headerToggles ? null : "searchToggle")
+                        }else {
                             headerToggleClick(null)
                         }
                     }} onInput={(e) => {
-                        searchSubmit(e)
-                        headerToggleClick(headerToggles ? null : "searchToggle")
-                        if (!e.target.value.split("").length) {
+                        if (e.target.value.split("").length > 2) {
+                            searchSubmit(e)
+                            headerToggleClick(headerToggles ? null : "searchToggle")
+                        }else {
                             headerToggleClick(null)
                         }
                     }} />

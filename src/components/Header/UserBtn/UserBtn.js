@@ -6,20 +6,17 @@ import Link from 'next/link'
 import { UserIcon } from '../../../svg'
 
 function UserBtn() {
-  const {usersData} = useSelector(selectUsers)
+  const {usersData, loginData} = useSelector(selectUsers)
   const [userName, setUserName] = useState(null)
   useEffect(() => {
-    if(usersData.name) {
-      setUserName(usersData.name)
-    }
-  }, [usersData])
+  }, [usersData,loginData])
   return (
     <>
       {
-        userName ?
+        usersData.name ?
           <Link href={"/personalRoom"}>
             <UserIcon />
-            <span>{userName}</span>
+            <span>{usersData?.name}</span>
           </Link> :
           <Link href="/login">
             <UserIcon />

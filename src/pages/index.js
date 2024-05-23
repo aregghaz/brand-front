@@ -16,12 +16,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectCategory } from "@/store/slices/category/categorySlice";
 import PreOrderModal from "@/components/PreOrderModal/PreOrderModal";
 import { selectProducts } from "@/store/slices/products/productsSlice";
+import { selectUsers } from "@/store/slices/users/usersSlice";
 
 export default function Home() {
     const [category, setCategory] = useState(false)
     const { categoryData } = useSelector(selectCategory)
     const { preOrderData } = useSelector(selectProducts)
+    const {usersData, loginData} = useSelector(selectUsers)
     const dispatch = useDispatch()
+
+    useEffect(() => {}, [usersData, loginData])
 
     useEffect(() => {
         if (window.innerWidth < 1025) {

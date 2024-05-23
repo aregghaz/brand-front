@@ -21,8 +21,8 @@ const loadStateFromCookie = () => {
         const cookiePairs = document.cookie.split(';');
         let loginData = {};
         let usersData = {};
-        let ordersStoryData = []
-        let orderSingleData = {}
+        let ordersStoryData = [];
+        let orderSingleData = {};
         for (const pair of cookiePairs) {
             const [key, value] = pair.trim().split('=');
             switch (key) {
@@ -48,29 +48,57 @@ const saveStateToCookie = (state) => {
     document.cookie = `usersData=${JSON.stringify(state.usersData)}; SameSite=None; Secure`;
 };
 
+const loadStateFromLocalStorage = () => {
+    try {
+        const serializedLoginData = localStorage.getItem('loginData');
+        const serializedUsersData = localStorage.getItem('usersData');
+        return {
+            loginData: serializedLoginData ? JSON.parse(serializedLoginData) : {},
+            usersData: serializedUsersData ? JSON.parse(serializedUsersData) : {},
+        };
+    } catch (e) {
+        console.error("Could not load state", e);
+        return { loginData: {}, usersData: {} };
+    }
+};
 
-const initialStateFromCookie = loadStateFromCookie();
-function clearAllCookies() {
+const saveStateToLocalStorage = (state) => {
+    try {
+        localStorage.setItem('loginData', JSON.stringify(state.loginData));
+        localStorage.setItem('usersData', JSON.stringify(state.usersData));
+    } catch (e) {
+        console.error("Could not save state", e);
+    }
+};
+
+const clearAllCookies = () => {
     const cookies = document.cookie.split(";");
-
     for (let i = 0; i < cookies.length; i++) {
         const cookie = cookies[i];
         const eqPos = cookie.indexOf("=");
         const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
         document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
     }
-}
+};
+
+const initialStateFromStorage = {
+    ...initialState,
+    ...loadStateFromLocalStorage(),
+    ...loadStateFromCookie(),
+};
+
 export const usersSlice = createSlice({
     name: "users",
-    initialState: initialStateFromCookie,
+    initialState: initialStateFromStorage,
     reducers: {
         logIn(state, { payload }) {
             clearAllCookies();
             state.loginData = { ...payload.loginData };
-            if(payload.save) {
-                state.saveUser = true
+            if (payload.save) {
+                state.saveUser = true;
                 saveStateToCookie(state);
             }
+            saveStateToLocalStorage(state);
         },
         toggleAddress(state, { payload }) {
             state.usersData = {
@@ -80,18 +108,18 @@ export const usersSlice = createSlice({
                     checked: el.id === payload.id ? true : false
                 }))
             };
-            if(!state.loginData.access_token || state.saveUser) {
+            if (!state.loginData.access_token || state.saveUser) {
                 saveStateToCookie(state);
             }
         },
         logOut(state) {
             state.loginData = {};
             state.usersData = {};
-            state.ordersStoryData = [];
-            state.orderSingleData = {};
+            state.saveUser = false; // Добавлено обнуление флага сохранения пользователя
             clearAllCookies();
-            saveStateToCookie(state)
-        }
+            saveStateToCookie(state);
+            saveStateToLocalStorage(state);
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(fetchUser.fulfilled, (state, { payload }) => {
@@ -100,33 +128,38 @@ export const usersSlice = createSlice({
                 state.usersData = {
                     ...payload.data,
                     address: [
-                        payload?.data?.address && {...payload.data.address?.map(el => ({
-                            ...el,
-                            checked: false
-                        }))}
+                        payload?.data?.address && {
+                            ...payload.data.address?.map(el => ({
+                                ...el,
+                                checked: false
+                            }))
+                        }
                     ]
                 };
-                if(!state.loginData.access_token || state.saveUser) {
+                if (!state.loginData.access_token || state.saveUser) {
                     saveStateToCookie(state);
                 }
+                saveStateToLocalStorage(state);
             }
         }),
-        builder.addCase(fetchOrders.fulfilled, (state, { payload }) => {
-            if (payload) {
-                state.ordersStoryData = [...payload.data];
-                if(!state.loginData.access_token || state.saveUser) {
-                    saveStateToCookie(state);
+            builder.addCase(fetchOrders.fulfilled, (state, { payload }) => {
+                if (payload) {
+                    state.ordersStoryData = [...payload.data];
+                    if (!state.loginData.access_token || state.saveUser) {
+                        saveStateToCookie(state);
+                    }
+                    saveStateToLocalStorage(state);
                 }
-            }
-        }),
-        builder.addCase(fetchOrderSingle.fulfilled, (state, { payload }) => {
-            if (payload) {
-                state.orderSingleData = { ...payload };
-                if(!state.loginData.access_token || state.saveUser) {
-                    saveStateToCookie(state);
+            }),
+            builder.addCase(fetchOrderSingle.fulfilled, (state, { payload }) => {
+                if (payload) {
+                    state.orderSingleData = { ...payload };
+                    if (!state.loginData.access_token || state.saveUser) {
+                        saveStateToCookie(state);
+                    }
+                    saveStateToLocalStorage(state);
                 }
-            }
-        })
+            })
     }
 });
 

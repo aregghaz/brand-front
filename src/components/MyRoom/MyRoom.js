@@ -21,16 +21,10 @@ function MyRoom() {
     const phoneRef = useRef(null);
 
     useEffect(() => {
-        if (!loginData.access_token) {
-            return router.push("/")
+        if (!usersData?.name) {
+            router.push("/")
         }
-    }, [loginData.access_token]);
-
-    // const [inputProps] = useInput({
-    //     mask: '+7 (999) 999-99-99',
-    // });
-
-    console.log(usersData);
+    }, [loginData]);
 
     const validationSchema = yup.object().shape({
         name: yup.string().required('Обязательное поле'),

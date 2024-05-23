@@ -47,7 +47,7 @@ function Registration() {
                         initialValues={{
                             name: "",
                             lastName: "",
-                            surName: "",
+                            fatherName: "",
                             password: "",
                             confirmPassword: "",
                             phone: "",
@@ -59,13 +59,14 @@ function Registration() {
                             await axios.post("https://back.brend-instrument.ru/api/auth/registration", {
                                 name: values.name,
                                 lastName: values.lastName,
+                                fatherName: values.fatherName,
                                 phone: values.phone,
                                 email: values.email,
                                 password: values.password,
                                 password_confirmation: values.confirmPassword,
                                 subscribed: false
                             }).then(({data: regData}) => {
-                                dispatch(logIn({ loginData: {access_token: regData.access_token}, save: false }))
+                                dispatch(logIn({ loginData: {...regData}, save: false }))
                                 dispatch(fetchUser({userToken: regData.access_token}))
                                 router.push("/")
                                 resetForm();
@@ -94,7 +95,7 @@ function Registration() {
                                 </label>
                             </div>
                             <label className='input-text'>Отчество *
-                                <Field type="text" className="input" name="surName" autoComplete="off" style={{ borderColor: errors.surName && touched.surName ? 'red' : 'inherit' }}
+                                <Field type="text" className="input" name="fatherName" autoComplete="off" style={{ borderColor: errors.fatherName && touched.fatherName ? 'red' : 'inherit' }}
                                     onChange={handleChange}
                                     onBlur={handleBlur} />
                             </label>

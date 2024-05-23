@@ -1,20 +1,20 @@
-"use client"
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { logOut, selectUsers } from '../../store/slices/users/usersSlice'
+"use client";
+import Link from 'next/link';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { logOut } from '../../store/slices/users/usersSlice';
+import { useRouter } from 'next/router';
 
 function MyRoomMenu() {
-    const dispatch = useDispatch()
-    const router = useRouter()
-    const {pathname} = router
-    const {usersData} = useSelector(selectUsers)
-    // useEffect(() => {
-    //     if(!usersData.name) {
-    //         // router.push("/")
-    //     } 
-    // }, [router])
+    const dispatch = useDispatch();
+    const router = useRouter();
+    const { pathname } = router;
+
+    const handleLogout = () => {
+        dispatch(logOut());
+        router.push('/'); // Перенаправление на главную страницу после выхода
+    };
+
     return (
         <div className="myroom-menu">
             <Link href="/personalRoom" className={`myroom-menu__item ${pathname === "/personalRoom" ? "active" : ""}`}>
@@ -41,13 +41,13 @@ function MyRoomMenu() {
                 </span>
                 Изменить пароль
             </Link>
-            <div className='myroom-menu__button'> 
-                <Link href="/" onClick={() => {
-                    dispatch(logOut())
-                }} >Выйти</Link>
+            <div className='myroom-menu__button'>
+                <button onClick={handleLogout} className="logout-button">
+                    Выйти
+                </button>
             </div>
         </div>
     )
 }
 
-export default MyRoomMenu
+export default MyRoomMenu;
