@@ -36,6 +36,10 @@ function ProductItem({ title, img, price, salePrice, id, slug, total, book }) {
         }, 1000);
         console.log(total > book.length);
     }, [uuId]);
+
+    const timer = book && book.length ? new Date(new Date(book[book.length - 1].created_at).getTime() + 24 * 60 * 60 * 1000) : new Date();
+
+
     return (
         <>
 
@@ -61,9 +65,9 @@ function ProductItem({ title, img, price, salePrice, id, slug, total, book }) {
                     </div>
                     <Link href="/" className="credit-btn">Оформить кредит в магазине!</Link>
                     <div className="product-item__buttons">
-                        <button onClick={addToCart} className="buy-btn" disabled={book?.length >= total ? true : false} style={{ maxWidth: book?.length >= total && "unset", backgroundColor: book?.length >= total && "#939393" }}>
+                        <button onClick={addToCart} className="buy-btn" disabled={book?.length >= total || timer > new Date()} style={{ maxWidth: (book?.length >= total || timer > new Date()) && "unset", backgroundColor: (book?.length >= total || timer > new Date()) && "#939393" }}>
                             {
-                                book?.length >= total ? "Забронировано" :
+                                book?.length >= total || timer > new Date() ? "Забронировано" :
                                     <>
                                         <BasketIcon color={"#FFF"} />
                                         Купить
@@ -81,7 +85,7 @@ function ProductItem({ title, img, price, salePrice, id, slug, total, book }) {
                             </button>
                         )}
                         {
-                            book?.length >= total ? "" :
+                            (book?.length >= total || timer > new Date()) ? "" :
                                 <button className='preorder-btn' onClick={() => {
                                     if (loginData.access_token) {
                                         dispatch(preOrder({ id: id, price: salePrice ? salePrice : price, name: title, toggle: true }))

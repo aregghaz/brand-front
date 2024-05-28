@@ -89,6 +89,8 @@ function ProductSingle({ slug, images, isLoading }) {
         var d = new Date(Date.UTC(t[0], t[1] - 1, t[2], t[3], t[4], t[5]));
     };
 
+    const timer = singlProductData.book && singlProductData.book.length ? new Date(new Date(singlProductData.book[singlProductData.book.length - 1].created_at).getTime() + 24 * 60 * 60 * 1000) : new Date();
+
     return (
         <>
             {isLoading ? (
@@ -188,19 +190,19 @@ function ProductSingle({ slug, images, isLoading }) {
                                             <p>Состояние: {singlProductData?.attributes[0]?.value}</p>
                                         </div>
                                         <div className="product-buttons">
-                                            <button onClick={() => { if (singlProductData.book.length < singlProductData.quantity) { addToCart() } }} disabled={singlProductData.book.length >= singlProductData.quantity}>
+                                            <button onClick={() => { if (singlProductData.book.length < singlProductData.quantity) { addToCart() } }} disabled={singlProductData.book.length >= singlProductData.quantity || timer > new Date()}>
                                                 <svg width={20} height={20} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M19.6783 3.96567C19.5715 3.81254 19.3996 3.71789 19.2128 3.70991L7.63477 3.21085C7.30257 3.19631 7.02497 3.45278 7.01077 3.78343C6.99665 4.11395 7.2527 4.39323 7.58331 4.40743L18.3775 4.87274L16.2551 11.4947H6.81036L5.10402 2.20378C5.06651 2.00015 4.92671 1.83027 4.7339 1.75463L1.9392 0.656708C1.63119 0.536118 1.28363 0.687408 1.16266 0.995043C1.04191 1.30284 1.19315 1.65062 1.501 1.77159L3.98593 2.74779L5.72238 12.2018C5.77472 12.486 6.02241 12.6924 6.3115 12.6924H6.59955L5.9418 14.5194C5.88674 14.6724 5.90943 14.8424 6.00312 14.9754C6.09668 15.1084 6.24885 15.1875 6.41129 15.1875H6.87264C6.58676 15.5056 6.41129 15.9245 6.41129 16.3852C6.41129 17.3759 7.21741 18.1818 8.20789 18.1818C9.19838 18.1818 10.0045 17.3759 10.0045 16.3852C10.0045 15.9246 9.82902 15.5056 9.54319 15.1875H13.4602C13.1742 15.5056 12.9988 15.9245 12.9988 16.3852C12.9988 17.3759 13.8047 18.1818 14.7954 18.1818C15.7861 18.1818 16.592 17.3759 16.592 16.3852C16.592 15.9246 16.4166 15.5056 16.1308 15.1875H16.6918C16.9675 15.1875 17.1909 14.964 17.1909 14.6884C17.1909 14.4128 16.9675 14.1894 16.6918 14.1894H7.12138L7.66029 12.6922H16.6918C16.9522 12.6922 17.1827 12.524 17.262 12.2762L19.7573 4.49084C19.8146 4.31315 19.7852 4.11888 19.6783 3.96567ZM8.20794 17.1839C7.76756 17.1839 7.40942 16.8258 7.40942 16.3854C7.40942 15.945 7.76756 15.5869 8.20794 15.5869C8.64831 15.5869 9.00641 15.945 9.00641 16.3854C9.00641 16.8258 8.64831 17.1839 8.20794 17.1839ZM14.7954 17.1839C14.355 17.1839 13.9969 16.8258 13.9969 16.3854C13.9969 15.945 14.355 15.5869 14.7954 15.5869C15.2358 15.5869 15.5939 15.945 15.5939 16.3854C15.5939 16.8258 15.2358 17.1839 14.7954 17.1839Z" fill="white" />
                                                 </svg>
                                                 Купить
                                                 {startAnim && <span className="product-item__animate" ref={addRef}>1</span>}
                                             </button>
-                                            <button disabled={singlProductData.book.length < singlProductData.quantity} onClick={() => { if (loginData.access_token) { dispatch(preOrder({ id: singlProductData.id, price: singlProductData.salePrice ? singlProductData.salePrice : singlProductData.price, name: singlProductData.title, toggle: true })) } else { router.push("/login") } }}>
+                                            <button disabled={singlProductData.book.length >= singlProductData.quantity || timer > new Date()} onClick={() => { if (loginData.access_token) { dispatch(preOrder({ id: singlProductData.id, price: singlProductData.salePrice ? singlProductData.salePrice : singlProductData.price, name: singlProductData.title, toggle: true })) } else { router.push("/login") } }}>
                                                 <BronIcon />
-                                                {singlProductData.book.length < singlProductData.quantity ? "Забронировать" :
+                                                {(singlProductData.book.length < singlProductData.quantity && timer <= new Date()) ? "Забронировать" :
                                                     <>
                                                         Забронировано
-                                                        <Timer endDate={new Date(singlProductData.book[0].created_at)} />
+                                                        <Timer endDate={timer} />
                                                     </>
                                                 }
                                             </button>
