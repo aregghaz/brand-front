@@ -32,7 +32,6 @@ function MyRoom() {
         email: yup.string().email('Недопустимый формат').required('Обязательное поле'),
         phone: yup.string().required('Обязательное поле'),
         fatherName: yup.string(),
-        address_1: yup.string(),
         city: yup.string(),
         created_at: yup.string(),
         password: yup.string().required()
@@ -60,7 +59,6 @@ function MyRoom() {
                                 }}
                                 onSubmit={async (values, { resetForm }) => {
                                     try {
-                                        console.log(values);
                                         await axios.post(
                                             `https://back.brend-instrument.ru/api/auth/update/${usersData.id}`,
                                             {
@@ -163,9 +161,10 @@ function MyRoom() {
                                                     className="input"
                                                     placeholder="Пароль"
                                                     defaultValue={values.password}
+                                                    value={values.password}
                                                     name="password"
                                                     autoComplete="off"
-                                                    style={{ borderColor: errors.created_at && touched.created_at ? 'red' : '#EDEDED' }}
+                                                    style={{ borderColor: errors.password && touched.password ? 'red' : '#EDEDED' }}
                                                     onChange={handleChange}
                                                     onBlur={handleBlur} />
                                             </label>

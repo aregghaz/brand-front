@@ -10,25 +10,12 @@ import { useRouter } from 'next/router';
 import PreOrderModal from '../PreOrderModal/PreOrderModal';
 import { selectProducts } from '@/store/slices/products/productsSlice';
 
-function Brandsingle({ slug }) {
+function Brandsingle({ slug, limit, setLimit, page, setPage }) {
     const [isLoading, setIsLoading] = useState(true);
     const dispatch = useDispatch();
     const { singleBrendData } = useSelector(selectBrands);
-    const [getBrend, setGetBrend] = useState(false)
-    const [page, setPage] = useState(1)
-    const [limit, setLimit] = useState(30)
     const router = useRouter()
     const {preOrderData} = useSelector(selectProducts)
-
-    useEffect(() => {
-        if (singleBrendData?.products?.length < limit) {
-            setGetBrend(true)
-        }
-        if (!getBrend) {
-            dispatch(fetchSinglBrendProducts({ brendId: slug, limit: limit, page: page }));
-            setGetBrend(true)
-        }
-    }, [singleBrendData])
 
     const nextPage = useCallback(() => {
         if (page < singleBrendData.lastPage) {

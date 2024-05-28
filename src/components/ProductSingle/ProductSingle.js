@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import parse from 'html-react-parser';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSingleProduct } from '../../store/slices/products/productsApi';
 import { counter, preOrder, selectProducts } from '../../store/slices/products/productsSlice';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -24,10 +23,8 @@ import PreOrderModal from '../PreOrderModal/PreOrderModal';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 
-function ProductSingle({ slug }) {
+function ProductSingle({ slug, images, isLoading }) {
     const swiperRef = useRef(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const [getProduct, setGetProduct] = useState(false);
     const [toggleInfo, setToggleInfo] = useState(true);
     const { loginData } = useSelector(selectUsers);
     const dispatch = useDispatch();
@@ -40,22 +37,6 @@ function ProductSingle({ slug }) {
     const router = useRouter();
     const [photoIndex, setPhotoIndex] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
-    const [images, setImages] = useState([])
-
-    useEffect(() => {
-        if (singlProductData.id) {
-            setIsLoading(true);
-            setImages([
-                `https://back.brend-instrument.ru${singlProductData.image}`,
-                ...(Array.isArray(singlProductData?.images) ? singlProductData.images.map(el => `https://back.brend-instrument.ru${el.path}`) : [])
-            ]);
-        }
-        if (!getProduct) {
-            setIsLoading(false);
-            dispatch(fetchSingleProduct({ slug: slug }));
-            setGetProduct(true);
-        }
-    }, [singlProductData, slug]);
 
     const handleCounter = (type) => {
         if (type === "-" && singlProductData?.count > 1) {

@@ -14,6 +14,7 @@ import Brendcrumbs from '../Brendcrumbs/Brendcrumbs';
 import { useRouter } from 'next/router';
 import CatalogTags from './CatalogTags/CatalogTags';
 import { selectTags } from '@/store/slices/tags/tagsSlice';
+import Head from 'next/head';
 
 function CatalogSingle({ slug }) {
 
@@ -79,6 +80,13 @@ function CatalogSingle({ slug }) {
             {
                 isLoading ?
                     <>
+                        {singleCategoryData && (
+                            <Head>
+                                <title>{singleCategoryData.meta_title}</title>
+                                <meta name="description" content={singleCategoryData.meta_desc} />
+                                <meta name="keywords" content={singleCategoryData.meta_key} />
+                            </Head>
+                        )}
                         <Brendcrumbs title={singleCategoryData?.title} links={[]} />
                         <section className="catalog-single">
                             <div className="catalog-single__container _container">

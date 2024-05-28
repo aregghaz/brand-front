@@ -43,7 +43,7 @@ function Footer() {
                             <Link href="/" className="logo"><img src="https://brend-instrument.ru/img/logo-i-gray-262x97 1 (1).png" alt="img" width={172} height={70} /></Link>
                             <form ref={subscribeRef} onSubmit={subscribeSubmit}>
                                 <h3>Подпишитесь, чтобы быть в курсе!</h3>
-                                <label className="input-text"><input type="text" placeholder="Ваша электронная почта" onChange={handleEmailChange} /></label>
+                                <label className="input-text"><input type="email" placeholder="Ваша электронная почта" onChange={handleEmailChange} /></label>
                                 <label className="input-btn"><input type="submit" defaultValue="Подписаться" /></label>
                             </form>
                         </div>

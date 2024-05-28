@@ -1,7 +1,9 @@
 "use client";
 import React, { memo, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
 import 'swiper/css';
+import "swiper/css/navigation";
 import ProductItem from "../ProductItem/ProductItem"
 import { useDispatch, useSelector } from 'react-redux';
 import { selectTags, toggleFetchTags } from '../../store/slices/tags/tagsSlice';
@@ -29,7 +31,16 @@ function Products({idx, fetch}) {
                         </div>
                         <div className="products__swiper">
                             {
-                                <Swiper slidesPerView={'auto'} loop={tagsData[idx].products.length > 16 ? true : false} className="swiper">
+                                <Swiper
+                                    slidesPerView={'auto'}
+                                    loop={tagsData[idx].products.length > 16 ? true : false}
+                                    className="swiper"
+                                    navigation={true}
+                                    pagination={{
+                                      clickable: true,
+                                    }}
+                                    modules={[Navigation]}
+                                >
                                     {
                                         tagsData[idx].products.map(el => (
                                             <SwiperSlide key={el?.id} className="swiper-slide"><ProductItem title={el?.title && el.title} img={el?.image && "https://back.brend-instrument.ru" + el?.image} price={el?.price} salePrice={el?.special_price === 0 ? false : el?.special_price} slug={el?.slug} id={el.id} book={el.book} total={el.quantity} /></SwiperSlide>

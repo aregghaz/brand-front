@@ -10,12 +10,17 @@ function FilterItem({title, values, id, prices, filterDataArray, setFilterDataAr
     const dispatch = useDispatch()
     const {singleCategoryData} = useSelector(selectCategory)
 
-    function handleFilter(valueId, value, toggle) {
+    function handleFilter(valueId, value, isChecked) {
         dispatch(toggleFilterValues({attributeId: id, valueId: valueId}))
-        if (toggle) {
+        if (!isChecked) {
             setFilterDataArray([...filterDataArray.filter(el => el[id] !== value)])
             if (!filterDataArray.filter(el => el[id] !== value).length) {
                 dispatch(clearFillter())
+                dispatch(fetchFilterCategory({
+                    filterData: [{9999: [...prices]}],
+                    categoryId: singleCategoryData.id,
+                    limit: 20
+                }))
             } else {
                 dispatch(fetchFilterCategory({
                     filterData: [...filterDataArray.filter(el => el[id] !== value), {9999: [...prices]}],
@@ -53,7 +58,7 @@ function FilterItem({title, values, id, prices, filterDataArray, setFilterDataAr
                                 <li key={value.id}>
                                     <label className="checkbox">
                                         <input type="checkbox" onClick={(e) => {
-                                            handleFilter(value.id, value.value, value.toggle)
+                                            handleFilter(value.id, value.value, e.target.checked)
                                             toggleMobileFillters(false)
                                         }}/>
                                         <span className="checkbox-span"/>
