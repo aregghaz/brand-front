@@ -6,6 +6,21 @@ import { selectBrands } from '../../store/slices/brands/brandsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSinglBrendProducts } from '../../store/slices/brands/brandsApi';
 import Head from 'next/head';
+import axios from 'axios'
+
+export async function getServerSideProps(context) {
+    const { slug } = context.params;
+    const limit = 20;
+    const page = 1;
+    const res = await axios.get(`https://back.brend-instrument.ru/api/products-by-brand-id/${slug}/${limit}?page=${page}`);
+
+    const brand = await res.data;
+    return {
+        props: {
+            brand
+        }
+    };
+}
 
 export default function Page() {
     const router = useRouter();

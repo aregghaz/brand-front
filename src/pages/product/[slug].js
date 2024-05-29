@@ -7,6 +7,19 @@ import { selectProducts } from '../../store/slices/products/productsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSingleProduct } from '../../store/slices/products/productsApi';
 import Head from 'next/head';
+import axios from 'axios'
+
+export async function getServerSideProps(context) {
+    const { slug } = context.params;
+    const res = await axios.get(`https://back.brend-instrument.ru/api/singleProduct/${slug}`);
+
+    const singleProductData = await res.data;
+    return {
+        props: {
+            singleProductData
+        }
+    };
+}
 
 export default function ProductSinglPage() {
     const router = useRouter();
@@ -43,13 +56,10 @@ export default function ProductSinglPage() {
                 </Head>
             )}
             <Suspense>
-                {
-                    slug && <ProductSingle
-                                slug={slug}
-                                images={images}
-                                isLoading={isLoading}
-                            />
-                }
+            <ProductSingle
+                images={images}
+                isLoading={isLoading}
+            />
             </Suspense>
             <Products idx={0} fetch={true} />
             <Products idx={1} />

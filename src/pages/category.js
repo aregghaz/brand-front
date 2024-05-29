@@ -10,6 +10,18 @@ import { useEffect, useState } from "react";
 import Brendcrumbs from "../components/Brendcrumbs/Brendcrumbs"
 import PreOrderModal from "@/components/PreOrderModal/PreOrderModal";
 import { selectProducts } from "@/store/slices/products/productsSlice";
+import axios from 'axios'
+
+export async function getServerSideProps() {
+    const res = await axios.get(`https://back.brend-instrument.ru/api/getTags`);
+
+    const tags = await res.data;
+    return {
+        props: {
+            tags
+        }
+    };
+}
 
 
 export default function CatalogPage() {

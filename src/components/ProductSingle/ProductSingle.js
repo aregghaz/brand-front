@@ -23,7 +23,7 @@ import PreOrderModal from '../PreOrderModal/PreOrderModal';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 
-function ProductSingle({ slug, images, isLoading }) {
+function ProductSingle({ images, isLoading }) {
     const swiperRef = useRef(null);
     const [toggleInfo, setToggleInfo] = useState(true);
     const { loginData } = useSelector(selectUsers);
