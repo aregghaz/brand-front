@@ -17,6 +17,34 @@ import { selectCategory } from "@/store/slices/category/categorySlice";
 import PreOrderModal from "@/components/PreOrderModal/PreOrderModal";
 import { selectProducts } from "@/store/slices/products/productsSlice";
 import { selectUsers } from "@/store/slices/users/usersSlice";
+import axios from 'axios'
+
+export async function getServerSideProps() {
+    const limit = 20;
+    const page = 1;
+    const topCategoryRes = await axios.get(`https://back.brend-instrument.ru/api/top-category/${limit}`);
+    const tagsRes = await axios.get(`https://back.brend-instrument.ru/api/getTags`);
+    const topBrendsRes = await axios.get(`https://back.brend-instrument.ru/api/top-brands/${limit}`);
+    const brendId = "Makita";
+    const topBrendRes = await axios.get(`https://back.brend-instrument.ru/api/products-by-brand-id/${brendId}/${limit}?page=${page}`);
+    const newsLimit = 20;
+    const homeNewsRes = await axios.get(`https://back.brend-instrument.ru/api/get-news/${newsLimit}?page=${page}`);
+
+    const topCategory = await topCategoryRes.data;
+    const tags = await tagsRes.data;
+    const topBrends = await topBrendsRes.data;
+    const topBrend = await topBrendRes.data;
+    const homeNews = await homeNewsRes.data;
+    return {
+        props: {
+            topCategory,
+            tags,
+            topBrends,
+            topBrend,
+            homeNews,
+        }
+    };
+}
 
 export default function Home() {
     const [category, setCategory] = useState(false)
