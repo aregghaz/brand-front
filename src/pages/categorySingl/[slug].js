@@ -7,6 +7,7 @@ import PreOrderModal from "@/components/PreOrderModal/PreOrderModal";
 import { useSelector } from "react-redux";
 import { selectProducts } from "@/store/slices/products/productsSlice";
 import axios from 'axios'
+import Head from 'next/head';
 
 export async function getServerSideProps(context) {
     const { slug } = context.params;
@@ -21,12 +22,19 @@ export async function getServerSideProps(context) {
     };
 }
 
-export default function CatalogSinglePage() {
+export default function CatalogSinglePage({ singleCat }) {
     const router = useRouter();
     const { slug } = router.query;
     const {preOrderData} = useSelector(selectProducts)
     return (
         <>
+            {singleCat && (
+                <Head>
+                    <title>{singleCat.category.meta_title}</title>
+                    <meta name="description" content={singleCat.category.meta_desc} />
+                    <meta name="keywords" content={singleCat.category.meta_key} />
+                </Head>
+            )}
             <Suspense >
                 {slug && <CatalogSingle slug={slug}  />}
             </Suspense>

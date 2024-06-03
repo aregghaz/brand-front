@@ -1,6 +1,7 @@
 import Brendcrumbs from "../components/Brendcrumbs/Brendcrumbs";
 import BrandsPage from "../components/BrandsPage/BrandsPage";
 import axios from 'axios'
+import Head from 'next/head';
 
 export async function getServerSideProps() {
     const name = 'а'
@@ -17,6 +18,9 @@ export async function getServerSideProps() {
 export default function Page() {
     return (
         <>
+            <Head>
+                <title>Бренды</title>
+            </Head>
             <Brendcrumbs title={"Бренды"} />
             <BrandsPage />
         </>

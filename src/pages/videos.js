@@ -2,6 +2,7 @@ import React from 'react'
 import Brendcrumbs from '../components/Brendcrumbs/Brendcrumbs'
 import VideosPage from '@/components/VideosPage/VideosPage'
 import axios from 'axios'
+import Head from 'next/head';
 
 export async function getServerSideProps() {
     const limit = 20;
@@ -19,6 +20,9 @@ export async function getServerSideProps() {
 export default function Page() {
     return (
         <>
+            <Head>
+                <title>Видеообзоры</title>
+            </Head>
             <Brendcrumbs title={"Видеообзоры"} />
             <VideosPage/>
         </>

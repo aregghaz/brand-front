@@ -1,6 +1,7 @@
 import Brendcrumbs from "../components/Brendcrumbs/Brendcrumbs";
 import News from "../components/News/News";
 import axios from 'axios'
+import Head from 'next/head';
 
 export async function getServerSideProps() {
     const limit = 20;
@@ -18,6 +19,9 @@ export async function getServerSideProps() {
 export default function NewsPage() {
     return (
         <>
+            <Head>
+                <title>Новости</title>
+            </Head>
             <Brendcrumbs title={"Новости"} />
             <News />
         </>

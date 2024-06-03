@@ -14,15 +14,15 @@ export async function getServerSideProps(context) {
     const page = 1;
     const res = await axios.get(`https://back.brend-instrument.ru/api/products-by-brand-id/${slug}/${limit}?page=${page}`);
 
-    const brand = await res.data;
+    const brandData = await res.data;
     return {
         props: {
-            brand
+            brandData
         }
     };
 }
 
-export default function Page() {
+export default function Page({ brandData }) {
     const router = useRouter();
     const dispatch = useDispatch();
     const { singleBrendData } = useSelector(selectBrands);
@@ -43,11 +43,11 @@ export default function Page() {
     }, [singleBrendData, slug])
     return (
         <>
-            {singleBrendData?.brand && (
+            {brandData && (
                 <Head>
-                    <title>{singleBrendData.brand.meta_title}</title>
-                    <meta name="description" content={singleBrendData.brand.meta_desc} />
-                    <meta name="keywords" content={singleBrendData.brand.meta_key} />
+                    <title>{brandData.brand.meta_title}</title>
+                    <meta name="description" content={brandData.brand.meta_desc} />
+                    <meta name="keywords" content={brandData.brand.meta_key} />
                 </Head>
             )}
             <Suspense>
