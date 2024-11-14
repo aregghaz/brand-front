@@ -85,7 +85,7 @@ function Checkout() {
                         onSubmit={async (values, { resetForm }) => {
                             let regData = {}
                             if (usersData.name) {
-                                await axios.post(`https://back.brend-instrument.ru/api/auth/create-order`,
+                                await axios.post(`http://api.calcarela.com/api/auth/create-order`,
                                     {
                                         cmd: 1,
                                         address_id: address ? usersData.address.filter(el => el.checked === true)[0].id : {
@@ -122,7 +122,7 @@ function Checkout() {
                                     }, 1900)
                                 })
                             } else {
-                                await axios.post("https://back.brend-instrument.ru/api/auth/registration", {
+                                await axios.post("http://api.calcarela.com/api/auth/registration", {
                                     name: values.name,
                                     lastName: values.lastName,
                                     phone: values.phone,
@@ -142,7 +142,7 @@ function Checkout() {
                                 if (regData.access_token) {
                                     dispatch(logIn({ loginData: regData, save: true }))
                                     dispatch(fetchUser({ userToken: regData.access_token }))
-                                    await axios.post(`https://back.brend-instrument.ru/api/auth/create-order`,
+                                    await axios.post(`http://api.calcarela.com/api/auth/create-order`,
                                         {
                                             cmd: usersData.name ? 1 : 2,
                                             uuId: guestUserId,

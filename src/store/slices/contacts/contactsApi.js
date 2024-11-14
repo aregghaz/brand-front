@@ -4,7 +4,7 @@ import axios from "axios";
 export const fetchContacts = createAsyncThunk(
     "contacts/fetchContacts",
     async function() {
-        const {data: contactsData} = await axios.get(`https://back.brend-instrument.ru/api/contacts-us`)
+        const {data: contactsData} = await axios.get(`http://api.calcarela.com/api/contacts-us`)
         return contactsData
     }
 )

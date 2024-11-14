@@ -62,7 +62,7 @@ function MyRoom() {
                                     try {
                                         console.log(values);
                                         await axios.post(
-                                            `https://back.brend-instrument.ru/api/auth/update/${usersData.id}`,
+                                            `http://api.calcarela.com/api/auth/update/${usersData.id}`,
                                             {
                                                 name: values.name,
                                                 lastName: values.lastName,

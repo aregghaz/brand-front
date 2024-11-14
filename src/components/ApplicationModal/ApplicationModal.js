@@ -60,7 +60,7 @@ function ApplicationModal({setAppModal}) {
             }}
             onSubmit={async (values, { resetForm }) => {
 
-              const {data: applicationData} = await axios.post("https://back.brend-instrument.ru/api/request-price", {
+              const {data: applicationData} = await axios.post("http://api.calcarela.com/api/request-price", {
                 name: values.name,
                 lastName: values.lastName,
                 company: values.company,

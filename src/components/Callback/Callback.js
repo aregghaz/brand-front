@@ -11,7 +11,7 @@ function Callback() {
     const [toggleSuccses, setToggleSuccses] = useState(false)
     const sendForm = (e) => {
         e.preventDefault()
-        axios.post(`https://back.brend-instrument.ru/api/questions`, {
+        axios.post(`http://api.calcarela.com/api/questions`, {
             name: callbackRef.current[0].value,
             email: callbackRef.current[1].value,
             notes: callbackRef.current[2].value

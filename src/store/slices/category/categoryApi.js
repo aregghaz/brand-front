@@ -8,7 +8,7 @@ export const fetchCategory = createAsyncThunk(
     "category/fetchCategory",
     async function ({limit}) {
         const {data: categoryData} = await useSWR(
-            `https://back.brend-instrument.ru/api/category`,
+            `http://api.calcarela.com/api/category`,
             fetcher
         )
        /// const {data: categoryData} = await axios.get(`https://back.brend-instrument.ru/api/category`)
@@ -22,7 +22,7 @@ export const fetchTopCategory = createAsyncThunk(
       //  const {data: topCategoryData} = await axios.get(`https://back.brend-instrument.ru/api/top-category/${limit}`, {headers: {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"}})
 
         const {data: topCategoryData} = useSWR(
-            `https://back.brend-instrument.ru/api/top-category/${limit}`,
+            `http://api.calcarela.com/api/top-category/${limit}`,
             fetcher
         )
 
@@ -33,7 +33,7 @@ export const fetchTopCategory = createAsyncThunk(
 export const fetchSingleCategory = createAsyncThunk(
     "category/fetchSingleCategory",
     async function ({categorySlug, limit}) {
-        const {data: singleCategoryData} = await axios.get(`https://back.brend-instrument.ru/api/singleCat/${categorySlug}/${limit ? limit : 20}`, {headers: {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"}})
+        const {data: singleCategoryData} = await axios.get(`hhttp://api.calcarela.com/api/singleCat/${categorySlug}/${limit ? limit : 20}`, {headers: {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"}})
         console.log(singleCategoryData);
         return singleCategoryData
     }
@@ -42,7 +42,7 @@ export const fetchSingleCategory = createAsyncThunk(
 export const fetchSinglCategoryChildren = createAsyncThunk(
     "category/fetchSinglCategoryChildren",
     async function ({categoryId, limit}) {
-        const {data: singleCategoryChildrenData} = await axios.get(`https://back.brend-instrument.ru/api/category/${categoryId}`, {headers: {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"}})
+        const {data: singleCategoryChildrenData} = await axios.get(`hhttp://api.calcarela.com/api/category/${categoryId}`, {headers: {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"}})
         return singleCategoryChildrenData
     }
 )
@@ -50,7 +50,7 @@ export const fetchSinglCategoryChildren = createAsyncThunk(
 export const fetchFilterCategory = createAsyncThunk(
     "category/fetchFilterCategory",
     async function ({filterData, categoryId, limit}) {
-        const {data: filterCategoryData} = await axios.post(`https://back.brend-instrument.ru/api/filtration/${categoryId}/${limit}`, {
+        const {data: filterCategoryData} = await axios.post(`hhttp://api.calcarela.com/api/filtration/${categoryId}/${limit}`, {
             headers: {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"},
             criteria: [...filterData]
         })
@@ -61,7 +61,7 @@ export const fetchFilterCategory = createAsyncThunk(
 export const fetchSortCategory = createAsyncThunk(
     "category/fetchSortCategory",
     async function ({id, categoryId, limit, filterData}) {
-        const {data: sortProductsData} = await axios.post(`https://back.brend-instrument.ru/api/filtration/${categoryId}/${limit}?sort_id=${id ? id : ""}`, {
+        const {data: sortProductsData} = await axios.post(`http://api.calcarela.com/api/filtration/${categoryId}/${limit}?sort_id=${id ? id : ""}`, {
             headers: {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"},
             criteria: [...filterData]
         })

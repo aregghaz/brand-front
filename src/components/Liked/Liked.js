@@ -36,7 +36,7 @@ function Liked() {
                                 <div className="liked__grid">
                                     {
                                         likedData?.map(product => (
-                                            <ProductItem key={product.id} title={product.name} img={product.attributes.image && `https://back.brend-instrument.ru/${product.attributes.image}`} price={product.price} salePrice={product.special_price === 0 ? false : product.special_price} id={product.id} slug={product.attributes.slug} />
+                                            <ProductItem key={product.id} title={product.name} img={product.attributes.image && `http://api.calcarela.com/${product.attributes.image}`} price={product.price} salePrice={product.special_price === 0 ? false : product.special_price} id={product.id} slug={product.attributes.slug} />
                                         ))
                                     }
                                 </div>

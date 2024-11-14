@@ -56,7 +56,7 @@ function Registration() {
                         }}
                         onSubmit={async (values, { resetForm }) => {
 
-                            await axios.post("https://back.brend-instrument.ru/api/auth/registration", {
+                            await axios.post("http://api.calcarela.com/api/auth/registration", {
                                 name: values.name,
                                 lastName: values.lastName,
                                 fatherName: values.fatherName,

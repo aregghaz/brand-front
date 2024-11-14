@@ -51,7 +51,7 @@ const TopCategory = () => {
             <Swiper slidesPerView={'auto'} loop={topCategoryData.length > 16 ? true : false} ref={topCategorySwiperRef} className="swiper">
               {
                 topCategoryData.map(el => (
-                  <SwiperSlide key={el.id} className="swiper-slide"><CategoryItem title={el.title} img={"https://back.brend-instrument.ru/" + el.image} id={el.id} slug={el.slug} /></SwiperSlide>
+                  <SwiperSlide key={el.id} className="swiper-slide"><CategoryItem title={el.title} img={"http://api.calcarela.com/" + el.image} id={el.id} slug={el.slug} /></SwiperSlide>
                 ))
               }
             </Swiper>

@@ -14,7 +14,7 @@ function PreOrderModal() {
     const dispatch = useDispatch()
 
     function submitOrder() {
-        axios.post(`https://back.brend-instrument.ru/api/auth/pre-order/${preOrderData.id}`,
+        axios.post(`http://api.calcarela.com/api/auth/pre-order/${preOrderData.id}`,
             {},
             {
                 headers: {

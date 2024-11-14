@@ -11,7 +11,7 @@ import {fetcher} from "@/store/slices/category/categoryApi";
 function MainBanner() {
   const [getBanners, setGetBanners] = useState(false)
   const {data: bannerSlidesData} =  useSWR(
-      `https://back.brend-instrument.ru/api/get-banners`,
+      `http://api.calcarela.com/api/get-banners`,
       fetcher
   )
 //  const {bannerSlidesData} = useSelector(selectBanners)
@@ -35,7 +35,7 @@ function MainBanner() {
         {
           bannerSlidesData?.map(banner => (
             <SwiperSlide key={banner.id}>
-              <img src={"https://back.brend-instrument.ru" + banner.image} alt="banner" />
+              <img src={"http://api.calcarela.com" + banner.image} alt="banner" />
             </SwiperSlide>
           ))
         }

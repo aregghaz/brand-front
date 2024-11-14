@@ -23,7 +23,7 @@ function Footer() {
 
         const [{ value: mail },] = subscribeRef.current
 
-        await axios.get(`https://back.brend-instrument.ru/api/subscription/${mail}`).then(res => {
+        await axios.get(`http://api.calcarela.com/api/subscription/${mail}`).then(res => {
             if (res.status === 200) {
                 setToggleSuccses(true)
             }

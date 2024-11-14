@@ -71,7 +71,7 @@ function HeaderSearch({ headerToggles, headerToggleClick, mobileSearch, setMobil
                                 return count >= index && (<div key={el.id} className='header__search-item'>
                                     <Link href={`/product/${el.slug}`} className='img'
                                         onClick={() => productLinkClick(el.slug)}>
-                                        <img src={"https://back.brend-instrument.ru/" + el.image} alt={el.title} />
+                                        <img src={"http://api.calcarela.com/" + el.image} alt={el.title} />
                                     </Link>
                                     <h4>
                                         <Link href={`/product/${el.slug}`} onClick={() => {

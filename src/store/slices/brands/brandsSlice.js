@@ -25,7 +25,7 @@ export const brandsSlice = createSlice({
             if(payload && payload.image) {
                 state.singleBrend = {
                     ...payload,
-                    image: "https://back.brend-instrument.ru" + payload.image
+                    image: "http://api.calcarela.com" + payload.image
                 };
             }
         })

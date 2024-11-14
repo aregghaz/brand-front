@@ -77,7 +77,7 @@ function Brandsingle({ slug }) {
                                     {
                                         singleBrendData?.products?.map(el => (
                                             <ProductItem key={el.id} title={el.title}
-                                                img={el.image ? "https://back.brend-instrument.ru" + el.image : null}
+                                                img={el.image ? "http://api.calcarela.com" + el.image : null}
                                                 price={el.price}
                                                 salePrice={el.special_price === 0 ? false : el.special_price}
                                                 id={el.id} slug={el.slug} />

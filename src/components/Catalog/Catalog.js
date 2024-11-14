@@ -22,7 +22,7 @@ function Catalog({Item}) {
                 <div className="catalog__grid">
                     {
                         categoryData?.map(category => (
-                            <CategoryItem key={category.id} img={"https://back.brend-instrument.ru/" + category.image} title={category.title} id={category.id.toString()} slug={category.slug} />
+                            <CategoryItem key={category.id} img={"http://api.calcarela.com/" + category.image} title={category.title} id={category.id.toString()} slug={category.slug} />
                         ))
                     }
                 </div>

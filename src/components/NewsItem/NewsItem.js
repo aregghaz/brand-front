@@ -15,7 +15,7 @@ function NewsItem({id, img, title, day, year, mounth, slug}) {
     return (
         <div className="news-item">
             <Link href={`/newsSingl/${slug}`} className="news-item__img" onClick={handlerGetSingl}>
-                <img src={ "https://back.brend-instrument.ru/" + img} alt="#"/>
+                <img src={ "http://api.calcarela.com/" + img} alt="#"/>
             </Link>
             <div className="news-item__text">
                 <span>{day}.{mounth}.{year} </span>

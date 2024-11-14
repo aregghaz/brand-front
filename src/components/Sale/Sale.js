@@ -23,7 +23,7 @@ function Sale({ fetch, idx }) {
                 <div className='sale__grid'>
                     {
                         tagsData[idx]?.products.map(el => (
-                            <ProductItem key={el?.id} title={el?.title && el.title} img={"https://back.brend-instrument.ru" + el?.image} price={el?.price} salePrice={el?.special_price === 0 ? false : el?.special_price} id={el?.id} slug={el.slug} />
+                            <ProductItem key={el?.id} title={el?.title && el.title} img={"http://api.calcarela.com/" + el?.image} price={el?.price} salePrice={el?.special_price === 0 ? false : el?.special_price} id={el?.id} slug={el.slug} />
                         ))
                     }
                 </div>

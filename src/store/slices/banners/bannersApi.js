@@ -10,7 +10,7 @@ export  const fetchBanners = createAsyncThunk(
     "banners/fetchBanners",
     async function () {
         const {data: bannersData} = await useSWR(
-            `https://back.brend-instrument.ru/api/get-banners`,
+            `http://api.calcarela.com/api/get-banners`,
             fetcher
         )
        /// const {data: bannersData} =  await axios.get(`https://back.brend-instrument.ru/api/get-banners`, {headers: {"Content-Type": "application/json"}})
@@ -23,7 +23,7 @@ export const fetchBannerSlides = createAsyncThunk(
     "banners/fetchBannerSlides",
     async function () {
         const {data: bannerSlidesData} = await useSWR(
-            "https://back.brend-instrument.ru/api/getSliders",
+            "http://api.calcarela.com/api/getSliders",
             fetcher
         )
        // const {data: bannerSlidesData} = await axios.get("https://back.brend-instrument.ru/api/getSliders", {headers: {"Content-Type": "application/json"}})

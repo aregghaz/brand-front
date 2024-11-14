@@ -19,7 +19,7 @@ function Login() {
 
         const [{ value: login }, { value: password }] = loginRef.current
 
-        await axios.post("https://back.brend-instrument.ru/api/auth/login", {
+        await axios.post("http://api.calcarela.com/api/auth/login", {
             email: login,
             password
         }).then(res => {

@@ -32,7 +32,7 @@ function TopBrend() {
                     <div className="top-brned__products">
                         {
                             topBrandData?.products?.map(el => (
-                                <ProductItem key={el.id} book={el.book} total={el.quantity} title={el.title} img={"https://back.brend-instrument.ru" + el.image} price={el.price} salePrice={el.special_price === 0 ? false : el.special_price} id={el.id} slug={el.slug} />
+                                <ProductItem key={el.id} book={el.book} total={el.quantity} title={el.title} img={"http://api.calcarela.com" + el.image} price={el.price} salePrice={el.special_price === 0 ? false : el.special_price} id={el.id} slug={el.slug} />
                             ))
                         }
                     </div>

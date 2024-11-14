@@ -39,7 +39,7 @@ function CategoryMenu({headerToggleClick, setMobileToggle}) {
                                 dispatch(fetchSinglCategoryChildren({categoryId: category.id, limit: 20}))
                                 headerToggleClick(false);
                             }}
-                            >{category.icon != 0 && <img src={"https://back.brend-instrument.ru" + category.icon}/>}{category.title}</Link>
+                            >{category.icon != 0 && <img src={"http://api.calcarela.com" + category.icon}/>}{category.title}</Link>
                             <ul>
                                 {
                                     category.children?.map(el => (

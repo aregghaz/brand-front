@@ -37,7 +37,7 @@ function Banner({position}) {
             banner?.image &&
                 <div className="banner">
                     <div className="banner__container _container" style={{backgroundImage: "url("+bannersData[0]?.image+")" }}>
-                        <img src={"https://back.brend-instrument.ru/" + banner?.image} alt={"banner"}/>
+                        <img src={"http://api.calcarela.com/" + banner?.image} alt={"banner"}/>
                     </div>
                 </div>
         }

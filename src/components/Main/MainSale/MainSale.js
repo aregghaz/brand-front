@@ -60,7 +60,7 @@ function MainSale() {
                       </h4>
                       <Timer endDate={new Date(el.end)} />
                     </div>
-                    <ProductItem title={el?.title && el.title} img={"https://back.brend-instrument.ru" + el?.image} price={el?.price} salePrice={el?.special_price === 0 ? false : el?.special_price} id={el?.id} slug={el.slug} />
+                    <ProductItem title={el?.title && el.title} img={"http://api.calcarela.com" + el?.image} price={el?.price} salePrice={el?.special_price === 0 ? false : el?.special_price} id={el?.id} slug={el.slug} />
                   </SwiperSlide>
                 ))
               }

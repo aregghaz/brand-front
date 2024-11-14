@@ -24,7 +24,7 @@ function RememberPass() {
 
         const [{ value: mail },] = loginRef.current
 
-        await axios.post(`https://back.brend-instrument.ru/api/auth/forgot-password`,
+        await axios.post(`http://api.calcarela.com/api/auth/forgot-password`,
             {
                 email: mail
             }

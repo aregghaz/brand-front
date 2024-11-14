@@ -36,7 +36,7 @@ function Search() {
         <div className='search-page__grid'>
           {
             searchProductsData?.map(product => (
-              <ProductItem title={product.title} img={product.image && `https://back.brend-instrument.ru/${product.image}`} price={product.price} salePrice={product.special_price === 0 ? false : product.special_price} id={product.id} slug={product.slug} />
+              <ProductItem title={product.title} img={product.image && `http://api.calcarela.com/${product.image}`} price={product.price} salePrice={product.special_price === 0 ? false : product.special_price} id={product.id} slug={product.slug} />
             ))
           }
         </div>

@@ -71,7 +71,7 @@ function CallbackModal({ succsesClick }) {
                   email: ""
                 }}
                 onSubmit={async (values, { resetForm }) => {
-                  await axios.post("https://back.brend-instrument.ru/api/call-back/add", {
+                  await axios.post("http://api.calcarela.com/api/call-back/add", {
                     email: values.email,
                     phone: values.phone,
                   }).then(res => {
