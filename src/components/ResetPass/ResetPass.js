@@ -6,6 +6,7 @@ import axios from 'axios'
 import { useSelector } from 'react-redux'
 import { selectUsers } from '../../store/slices/users/usersSlice'
 import SuccsesModal from '../SuccsesModal/SuccsesModal'
+import {fakeUrl} from "@/utils/fakeUrl";
 
 function ResetPass() {
     const [togglePass, setTogglePass] = useState(false)
@@ -15,7 +16,7 @@ function ResetPass() {
     const resetPassSubmit = (e) => {
         e.preventDefault()
         if (resetPassRef.current[0].value === resetPassRef.current[2].value) {
-            axios.get(`https://back.brend-instrument.ru/api/auth/reset?password=${resetPassRef.current[0].value}`,
+            axios.get(`${fakeUrl}/api/auth/reset?password=${resetPassRef.current[0].value}`,
                 {
                     headers: {
                         Authorization: "Bearer " + loginData.access_token, "Content-Type": "application/json"

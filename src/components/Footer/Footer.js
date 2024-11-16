@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import { selectContacts } from '../../store/slices/contacts/contactsSlice'
 import SuccsesModal from '../SuccsesModal/SuccsesModal'
 import axios from 'axios'
+import {baseUrl} from "@/utils/fakeUrl";
 
 function Footer() {
     const { contactsData } = useSelector(selectContacts)
@@ -40,7 +41,7 @@ function Footer() {
                 <div className="footer__top">
                     <div className="footer__container _container">
                         <div className="footer__abaut">
-                            <Link href="/" className="logo"><img src="https://brend-instrument.ru/img/logo-i-gray-262x97 1 (1).png" alt="img" width={172} height={70} /></Link>
+                            <Link href="/" className="logo"><img src={`${baseUrl}/img/logo-i-gray-262x97 1 (1).png`} alt="img" width={172} height={70} /></Link>
                             <form ref={subscribeRef} onSubmit={subscribeSubmit}>
                                 <h3>Подпишитесь, чтобы быть в курсе!</h3>
                                 <label className="input-text"><input type="text" placeholder="Ваша электронная почта" onChange={handleEmailChange} /></label>
@@ -113,7 +114,7 @@ function Footer() {
                             </div>
                             <div className="cards">
                                 <p>Принимаем к оплате:</p>
-                                <img src="https://brend-instrument.ru/img/Group 48096099.png" alt='cards' />
+                                <img src={`${baseUrl}/img/Group 48096099.png`} alt='cards' />
                             </div>
                         </div>
                     </div>

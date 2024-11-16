@@ -1,4 +1,5 @@
 import React from 'react'
+import {baseUrl} from "@/utils/fakeUrl";
 
 function AbautPage() {
     return (
@@ -12,10 +13,10 @@ function AbautPage() {
                     <p>Вам ни к чему лишние затраты при ремонте, и строительстве, тогда Вы понимаете почему покупать бывший в упортеблении электроинструмент выгодно!Мы помогаем людям уменьшить свои затраты во время проведения стройки или ремонта!</p>
                 </div>
                 <div className="abaut-page__grid">
-                    <img src={"https://brend-instrument.ru/img/r3 1.png"} alt='img' />
-                    <img src={"https://brend-instrument.ru/img/r10 1.png"} alt='img' />
-                    <img src={"https://brend-instrument.ru/img/r9 1.png"} alt='img' />
-                    <img src={"https://brend-instrument.ru/img/R1 1.png"} alt='img' />
+                    <img src={`${baseUrl}/img/r3 1.png`} alt='img' />
+                    <img src={`${baseUrl}/img/r10 1.png`} alt='img' />
+                    <img src={`${baseUrl}/img/r9 1.png`} alt='img' />
+                    <img src={`${baseUrl}/img/R1 1.png`} alt='img' />
                 </div>
             </div>
         </section>

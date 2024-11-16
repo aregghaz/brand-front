@@ -11,6 +11,7 @@ import UserBtn from './UserBtn/UserBtn';
 import HeaderMobile from './HeaderMobile/HeaderMobile';
 import HeaderSearch from './HeaderSearch/HeaderSearch';
 import ContactsLink from './ContactsLink/ContactsLink';
+import {baseUrl} from "@/utils/fakeUrl";
 
 function Header() {
 
@@ -105,8 +106,8 @@ function Header() {
                             </button>
                             <HeaderMobile {...{ mobileToggle, setMobileToggle, headerToggles, headerToggleClick }} />
                             <Link href="/" className="logo">
-                                <img src="https://brend-instrument.ru/img/logo-i-gray-262x97 1 (1).png" alt={'brand-instrument'} className='logo1' />
-                                <img src="https://brend-instrument.ru/img/logo-i-gray-262x97 2@2x.png" alt={'brand-instrument'} className='logo2' />
+                                <img src={`${baseUrl}/img/logo-i-gray-262x97 1 (1).png`} alt={'brand-instrument'} className='logo1' />
+                                <img src={`${baseUrl}/img/logo-i-gray-262x97 2@2x.png`} alt={'brand-instrument'} className='logo2' />
                             </Link>
                             <button className="catalog-btn" onClick={() => headerToggleClick(headerToggles ? null : "catalogLinks")}>
                                 <BurgerIcon />

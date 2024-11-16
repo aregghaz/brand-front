@@ -17,6 +17,7 @@ import { selectCategory } from "@/store/slices/category/categorySlice";
 import PreOrderModal from "@/components/PreOrderModal/PreOrderModal";
 import { selectProducts } from "@/store/slices/products/productsSlice";
 import { selectUsers } from "@/store/slices/users/usersSlice";
+import {fakeUrl} from "@/utils/fakeUrl";
 
 export default function Home() {
     const [category, setCategory] = useState(false)
@@ -51,7 +52,7 @@ export default function Home() {
                                             dispatch(fetchSinglCategoryChildren({ categoryId: category.id, limit: 20 }))
                                         }}
                                     >{category.icon != 0 &&
-                                        <span className='image-span'>  <img src={"https://back.brend-instrument.ru" + category.icon} /></span>}<span>{category.title}</span>
+                                        <span className='image-span'>  <img src={fakeUrl + category.icon} /></span>}<span>{category.title}</span>
                                     </Link>
                                 </li>
                             ))

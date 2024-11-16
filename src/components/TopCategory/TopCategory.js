@@ -9,6 +9,7 @@ import 'swiper/css';
 import { ArrowNext, ArrowPrev } from "../../svg";
 import Link from "next/link";
 
+import {baseUrl} from "@/utils/fakeUrl";
 
 const TopCategory = () => {
   const dispatch = useDispatch()
@@ -40,7 +41,7 @@ const TopCategory = () => {
           <Link href="/category">Смотреть все</Link>
         </div>
         <div className="top-category__flex">
-          <div className="top-category__img"><img src={"https://brend-instrument.ru/img/Rectangle 149940.png"} alt={"aa"} /></div>
+          <div className="top-category__img"><img src={`${baseUrl}/img/Rectangle 149940.png`} alt={"aa"} /></div>
           <div className="top-category__swiper">
             <button className="slideprev" onClick={() => prevSlide()}>
               <ArrowPrev />

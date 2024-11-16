@@ -23,6 +23,7 @@ import Timer from '../Timer/Timer';
 import PreOrderModal from '../PreOrderModal/PreOrderModal';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
+import {fakeUrl} from "@/utils/fakeUrl";
 
 function ProductSingle({ slug }) {
     const swiperRef = useRef(null);
@@ -46,8 +47,8 @@ function ProductSingle({ slug }) {
         if (singlProductData.id) {
             setIsLoading(true);
             setImages([
-                `https://back.brend-instrument.ru${singlProductData.image}`,
-                ...(Array.isArray(singlProductData?.images) ? singlProductData.images.map(el => `https://back.brend-instrument.ru${el.path}`) : [])
+                `${fakeUrl}${singlProductData.image}`,
+                ...(Array.isArray(singlProductData?.images) ? singlProductData.images.map(el => `${fakeUrl}${el.path}`) : [])
             ]);
         }
         if (!getProduct) {
@@ -126,13 +127,13 @@ function ProductSingle({ slug }) {
                                         modules={[Thumbs]}
                                         ref={swiperRef}>
                                         <SwiperSlide>
-                                            <a href={`https://back.brend-instrument.ru${singlProductData.image}`} className='img' onClick={(e) => { e.preventDefault(); setIsOpen(true); console.log(isOpen, images.length); }}></a>
-                                            <img src={`https://back.brend-instrument.ru${singlProductData.image}`} alt="asd" />
+                                            <a href={`${fakeUrl}${singlProductData.image}`} className='img' onClick={(e) => { e.preventDefault(); setIsOpen(true); console.log(isOpen, images.length); }}></a>
+                                            <img src={`${fakeUrl}${singlProductData.image}`} alt="asd" />
                                         </SwiperSlide>
                                         {singlProductData?.images?.map((el, index) => (
                                             <SwiperSlide key={el.id}>
-                                                <a href={`https://back.brend-instrument.ru${el.path}`} className='img' onClick={(e) => { e.preventDefault(); setIsOpen(true); console.log(isOpen, images.length); }}></a>
-                                                <img src={`https://back.brend-instrument.ru${el.path}`} alt="asd" />
+                                                <a href={`${fakeUrl}${el.path}`} className='img' onClick={(e) => { e.preventDefault(); setIsOpen(true); console.log(isOpen, images.length); }}></a>
+                                                <img src={`${fakeUrl}${el.path}`} alt="asd" />
                                             </SwiperSlide>
                                         ))}
                                     </Swiper>
@@ -163,12 +164,12 @@ function ProductSingle({ slug }) {
                                             watchSlidesProgress={true}>
                                             <SwiperSlide>
                                                 <img
-                                                    src={`https://back.brend-instrument.ru${singlProductData.image}`}
+                                                    src={`${fakeUrl}${singlProductData.image}`}
                                                     alt="asd" />
                                             </SwiperSlide>
                                             {singlProductData?.images?.map(el => (
                                                 <SwiperSlide key={el.id}>
-                                                    <img src={`https://back.brend-instrument.ru${el.path}`}
+                                                    <img src={`${fakeUrl}${el.path}`}
                                                         alt="asd" />
                                                 </SwiperSlide>
                                             ))}
