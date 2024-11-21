@@ -6,15 +6,16 @@ import { Formik, Field, Form } from 'formik';
 import * as yup from 'yup';
 import InputMask from 'react-input-mask';
 import axios from 'axios';
-import { selectCart } from '../../store/slices/cart/cartSlice';
+import { selectCart } from '@/store/slices/cart/cartSlice';
 import { useRouter } from 'next/navigation';
 import { selectProducts } from '../../store/slices/products/productsSlice';
-import { fetchOrders, fetchUser } from '../../store/slices/users/usersApi';
+import { fetchOrders, fetchUser } from '@/store/slices/users/usersApi';
 import BasketTable from '../BasketTable/BasketTable';
 import SuccsesModal from '../SuccsesModal/SuccsesModal';
 import Link from "next/link"
-import { fetchCart } from '../../store/slices/cart/cartApi';
+import { fetchCart } from '@/store/slices/cart/cartApi';
 import { DetailIcon, PaymentIcon } from '@/svg';
+import {fakeUrl} from "@/utils/fakeUrl";
 
 function Checkout() {
     const { usersData, loginData } = useSelector(selectUsers)
@@ -85,7 +86,7 @@ function Checkout() {
                         onSubmit={async (values, { resetForm }) => {
                             let regData = {}
                             if (usersData.name) {
-                                await axios.post(`http://api.calcarela.com/api/auth/create-order`,
+                                await axios.post(`${fakeUrl}/api/auth/create-order`,
                                     {
                                         cmd: 1,
                                         address_id: address ? usersData.address.filter(el => el.checked === true)[0].id : {
@@ -122,7 +123,7 @@ function Checkout() {
                                     }, 1900)
                                 })
                             } else {
-                                await axios.post("http://api.calcarela.com/api/auth/registration", {
+                                await axios.post("${fakeUrl}/api/auth/registration", {
                                     name: values.name,
                                     lastName: values.lastName,
                                     phone: values.phone,
@@ -142,7 +143,7 @@ function Checkout() {
                                 if (regData.access_token) {
                                     dispatch(logIn({ loginData: regData, save: true }))
                                     dispatch(fetchUser({ userToken: regData.access_token }))
-                                    await axios.post(`http://api.calcarela.com/api/auth/create-order`,
+                                    await axios.post(`${fakeUrl}/api/auth/create-order`,
                                         {
                                             cmd: usersData.name ? 1 : 2,
                                             uuId: guestUserId,

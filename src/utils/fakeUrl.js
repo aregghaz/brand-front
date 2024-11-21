@@ -1,2 +1,2 @@
-export const fakeUrl = 'https://api.kinomino.ru'
+export const fakeUrl = 'https://kinomino.ru'
 export const baseUrl = 'http://calcarela.com'

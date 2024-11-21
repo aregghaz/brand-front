@@ -14,6 +14,7 @@ import Brendcrumbs from '../Brendcrumbs/Brendcrumbs';
 import { useRouter } from 'next/router';
 import CatalogTags from './CatalogTags/CatalogTags';
 import { selectTags } from '@/store/slices/tags/tagsSlice';
+import {fakeUrl} from "@/utils/fakeUrl";
 
 function CatalogSingle({ slug }) {
 
@@ -149,7 +150,7 @@ function CatalogSingle({ slug }) {
                                         <div className="catalog-single__category">
                                             {singleCategoryChildrenData?.children?.length ?
                                                 singleCategoryChildrenData?.children?.map(el => (
-                                                    <CategoryItem key={el.id} title={el.title} img={"http://api.calcarela.com/" + el.image} id={el.id} slug={el.slug} />
+                                                    <CategoryItem key={el.id} title={el.title} img={fakeUrl + el.image} id={el.id} slug={el.slug} />
                                                 )) : ""
                                             }
                                         </div>
@@ -170,7 +171,7 @@ function CatalogSingle({ slug }) {
                                                 singleCategoryData?.products?.length ?
                                                     singleCategoryData?.products.map(product => (
                                                         <Suspense key={product.id}>
-                                                            <ProductItem title={product.name} img={product.image && `http://api.calcarela.com/${product.image}`} price={product.price} salePrice={product.special_price === 0 ? false : product.special_price} id={product.id} slug={product.slug} total={product.quantity} book={product.book} />
+                                                            <ProductItem title={product.name} img={product.image && `${fakeUrl}/${product.image}`} price={product.price} salePrice={product.special_price === 0 ? false : product.special_price} id={product.id} slug={product.slug} total={product.quantity} book={product.book} />
                                                         </Suspense>
                                                     )) : <></>
                                             }

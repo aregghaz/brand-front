@@ -1,11 +1,12 @@
 "use client";
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCart } from "../../store/slices/cart/cartSlice"
-import { fetchDeleteCart, fetchUpdateCart } from '../../store/slices/cart/cartApi';
-import { selectUsers } from '../../store/slices/users/usersSlice';
-import { MinusIcon, PlusIcon, RemoveIcon } from '../../svg';
+import { selectCart } from "@/store/slices/cart/cartSlice"
+import { fetchDeleteCart, fetchUpdateCart } from '@/store/slices/cart/cartApi';
+import { selectUsers } from '@/store/slices/users/usersSlice';
+import { MinusIcon, PlusIcon, RemoveIcon } from '@/svg';
 import { useRouter } from 'next/router';
+import {fakeUrl} from "@/utils/fakeUrl";
 
 function BasketItem({image, price, quantity, number, name, productId, removeBtn, maxCount, orderQuantity}) {
     const {loginData} = useSelector(selectUsers)
@@ -32,7 +33,7 @@ function BasketItem({image, price, quantity, number, name, productId, removeBtn,
         <div className="basket__item">
             <p>{number}</p>
             <div className="basket__item-img">
-                <img src={"http://api.calcarela.com/" + image} alt='img' />
+                <img src={fakeUrl + image} alt='img' />
             </div>
             <h4>{name}</h4>
             <p className="price">{price} ₽</p>

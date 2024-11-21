@@ -1,13 +1,14 @@
 "use client";
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchTopBrands, fetchSinglBrendProducts } from '../../store/slices/brands/brandsApi';
+import { fetchTopBrands, fetchSinglBrendProducts } from '@/store/slices/brands/brandsApi';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import { ArrowNext, ArrowPrev } from "../../svg";
+import { ArrowNext, ArrowPrev } from "@/svg";
 import BrandsItem from '../BrandsItem/BrandsItem';
-import { selectBrands } from '../../store/slices/brands/brandsSlice';
+import { selectBrands } from '@/store/slices/brands/brandsSlice';
 import Link from 'next/link';
+import {fakeUrl} from "@/utils/fakeUrl";
 
 function Brands() {
     const dispatch = useDispatch()
@@ -45,7 +46,7 @@ function Brands() {
                             topBrandsData.map(el => (
                                 <SwiperSlide key={el.id} className="swiper-slide">
                                     <Link href={`/brandSingle/${el.slug}`} onClick={() => window.scrollTo(0, 0)}>
-                                        <BrandsItem id={el.id} title={el.title} img={el.image && "http://api.calcarela.com/" + el.image} onClick={() => fetchSinglBrend(el.id)} />
+                                        <BrandsItem id={el.id} title={el.title} img={el.image && fakeUrl + el.image} onClick={() => fetchSinglBrend(el.id)} />
                                     </Link>
                                 </SwiperSlide>
                             ))

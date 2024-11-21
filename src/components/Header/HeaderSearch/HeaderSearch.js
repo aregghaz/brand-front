@@ -3,10 +3,11 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSearch } from "../../../store/slices/search/searchApi"
 import { selectSearch, toggleSearchValue } from '../../../store/slices/search/searchSlice';
-import { fetchSingleProduct } from "../../../store/slices/products/productsApi"
+import { fetchSingleProduct } from "@/store/slices/products/productsApi"
 import { SearchIcon } from '../../../svg';
-import { selectCategory } from '../../../store/slices/category/categorySlice';
+import { selectCategory } from '@/store/slices/category/categorySlice';
 import parse from 'html-react-parser';
+import {fakeUrl} from "@/utils/fakeUrl";
 
 import Link from 'next/link';
 
@@ -71,7 +72,7 @@ function HeaderSearch({ headerToggles, headerToggleClick, mobileSearch, setMobil
                                 return count >= index && (<div key={el.id} className='header__search-item'>
                                     <Link href={`/product/${el.slug}`} className='img'
                                         onClick={() => productLinkClick(el.slug)}>
-                                        <img src={"http://api.calcarela.com/" + el.image} alt={el.title} />
+                                        <img src={fakeUrl + "/"  + el.image} alt={el.title} />
                                     </Link>
                                     <h4>
                                         <Link href={`/product/${el.slug}`} onClick={() => {

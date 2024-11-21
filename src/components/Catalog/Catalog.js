@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectCategory } from '../../store/slices/category/categorySlice';
 import { fetchCategory } from '../../store/slices/category/categoryApi';
 import CategoryItem from '../CategoryItem/CategoryItem';
+import {fakeUrl} from "@/utils/fakeUrl";
 
 function Catalog({Item}) {
     const dispatch = useDispatch()
@@ -22,7 +23,7 @@ function Catalog({Item}) {
                 <div className="catalog__grid">
                     {
                         categoryData?.map(category => (
-                            <CategoryItem key={category.id} img={"http://api.calcarela.com/" + category.image} title={category.title} id={category.id.toString()} slug={category.slug} />
+                            <CategoryItem key={category.id} img={fakeUrl + category.image} title={category.title} id={category.id.toString()} slug={category.slug} />
                         ))
                     }
                 </div>

@@ -7,11 +7,12 @@ import { fetchBannerSlides } from '../../../store/slices/banners/bannersApi';
 import { selectProducts } from '../../../store/slices/products/productsSlice';
 import useSWR from "swr";
 import {fetcher} from "@/store/slices/category/categoryApi";
+import {fakeUrl} from "@/utils/fakeUrl";
 
 function MainBanner() {
   const [getBanners, setGetBanners] = useState(false)
   const {data: bannerSlidesData} =  useSWR(
-      `http://api.calcarela.com/api/get-banners`,
+      `${fakeUrl}api/get-banners`,
       fetcher
   )
 //  const {bannerSlidesData} = useSelector(selectBanners)

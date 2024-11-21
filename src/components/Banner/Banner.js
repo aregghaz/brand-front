@@ -1,8 +1,9 @@
 "use client"
 import React, { memo, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectBanners } from '../../store/slices/banners/bannersSlice'
-import { fetchBanners } from '../../store/slices/banners/bannersApi'
+import { selectBanners } from '@/store/slices/banners/bannersSlice'
+import { fetchBanners } from '@/store/slices/banners/bannersApi'
+import {fakeUrl} from "@/utils/fakeUrl";
 
 function Banner({position}) {
 
@@ -37,7 +38,7 @@ function Banner({position}) {
             banner?.image &&
                 <div className="banner">
                     <div className="banner__container _container" style={{backgroundImage: "url("+bannersData[0]?.image+")" }}>
-                        <img src={"http://api.calcarela.com/" + banner?.image} alt={"banner"}/>
+                        <img src={fakeUrl + banner?.image} alt={"banner"}/>
                     </div>
                 </div>
         }

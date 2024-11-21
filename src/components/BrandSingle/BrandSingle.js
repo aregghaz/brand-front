@@ -3,12 +3,13 @@ import React, { useCallback, useEffect, useState } from 'react'
 import Loader from '../Loader/Loader'
 import ProductItem from '../ProductItem/ProductItem';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectBrands } from '../../store/slices/brands/brandsSlice';
-import { fetchSinglBrendProducts } from '../../store/slices/brands/brandsApi';
+import { selectBrands } from '@/store/slices/brands/brandsSlice';
+import { fetchSinglBrendProducts } from '@/store/slices/brands/brandsApi';
 import Brendcrumbs from "../Brendcrumbs/Brendcrumbs"
 import { useRouter } from 'next/router';
 import PreOrderModal from '../PreOrderModal/PreOrderModal';
 import { selectProducts } from '@/store/slices/products/productsSlice';
+import {fakeUrl} from "@/utils/fakeUrl";
 
 function Brandsingle({ slug }) {
     const [isLoading, setIsLoading] = useState(true);
@@ -77,7 +78,7 @@ function Brandsingle({ slug }) {
                                     {
                                         singleBrendData?.products?.map(el => (
                                             <ProductItem key={el.id} title={el.title}
-                                                img={el.image ? "http://api.calcarela.com" + el.image : null}
+                                                img={el.image ? fakeUrl + el.image : null}
                                                 price={el.price}
                                                 salePrice={el.special_price === 0 ? false : el.special_price}
                                                 id={el.id} slug={el.slug} />

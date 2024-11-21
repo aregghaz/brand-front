@@ -1,6 +1,7 @@
 "use client";
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchBrands, fetchBrandsByName, fetchSinglBrendProducts, fetchSingleBrend, fetchTopBrand, fetchTopBrands } from "./brandsApi";
+import {fakeUrl} from "@/utils/fakeUrl";
 
 export const brandsSlice = createSlice({
     name: "brands",
@@ -25,7 +26,7 @@ export const brandsSlice = createSlice({
             if(payload && payload.image) {
                 state.singleBrend = {
                     ...payload,
-                    image: "http://api.calcarela.com" + payload.image
+                    image: fakeUrl + payload.image
                 };
             }
         })
